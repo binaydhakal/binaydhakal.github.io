@@ -1,6 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Binaya Dhakal — Founder & CEO of Yanib, Senior Fullstack Software Engineer, AI/ML Researcher. Building AI-powered developer tools and production-grade machine learning systems.">
+	<meta name="theme-color" content="#0A0A0A">
+
+	<title>Binaya Dhakal — Founder & CEO of Yanib · AI Engineer · Researcher</title>
+
+	<!-- Open Graph / Twitter -->
+	<meta property="og:title" content="Binaya Dhakal — Founder & CEO of Yanib">
+	<meta property="og:description" content="Building AI-powered developer tools. Fullstack engineer, ML researcher, founder.">
+	<meta property="og:type" content="profile">
+	<meta property="og:url" content="https://binaydhakal.github.io">
+	<meta name="twitter:card" content="summary_large_image">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/png" href="assets/logo/favicon.png">
+
 	<!-- Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-X3T2V9K1VE"></script>
 	<script>
@@ -10,1477 +28,822 @@
 		gtag('config', 'G-X3T2V9K1VE');
 	</script>
 
-	<!-- Yanib embeddable SDK -->
-	<script src="https://www.yanib.dev/sdk.js"></script>
-
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Binaya Dhakal — AI/ML Engineer and Researcher at the University of New Haven. Work on transformers, vision models, retrieval-augmented systems.">
-
-	<title>Binaya Dhakal — AI/ML Engineer &amp; Researcher</title>
-
-	<link rel="shortcut icon" type="image/png" href="assets/logo/NN2.png">
-
-	<!-- Fonts: Fraunces (variable serif display), IBM Plex Sans (body), IBM Plex Mono (technical) -->
+	<!-- Fonts: Fraunces (variable display serif) + Geist (body) + Geist Mono (technical) -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+	<!-- Yanib SDK (drives all embedded widgets below) -->
+	<script src="https://www.yanib.dev/sdk.js"></script>
+
+	<!-- Tailwind via Play CDN — static GitHub Pages, no build step -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
+						sans: ['Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+						mono: ['"Geist Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+					},
+					colors: {
+						ink: {
+							50:  '#FAFAF9',
+							100: '#F4F4F3',
+							200: '#E8E8E6',
+							300: '#D1D1CE',
+							400: '#8A8A86',
+							500: '#525250',
+							600: '#383836',
+							700: '#252524',
+							800: '#171715',
+							900: '#0A0A0A',
+						},
+						yanib: {
+							50:  '#F5F3FF',
+							100: '#EDE9FE',
+							500: '#7c3aed',
+							600: '#6d28d9',
+							700: '#5b21b6',
+						},
+					},
+					letterSpacing: {
+						tightest: '-0.045em',
+					},
+				},
+			},
+		};
+	</script>
 
 	<style>
-		/* ─────────────────────────────────────────────────────────
-		   Design tokens — warm paper, academic crimson, ink.
-		   Inspired by scientific journal + editorial magazine.
-		───────────────────────────────────────────────────────── */
-		:root {
-			--paper:        #F5F2EC;
-			--paper-deeper: #EDE8DD;
-			--cream:        #E9E2D3;
-			--line:         #D6CEBC;
-			--line-soft:    #E3DCCC;
-			--ink:          #17161A;
-			--ink-soft:     #363236;
-			--muted:        #6E6A61;
-			--muted-soft:   #9A9488;
-			--crimson:      #B42318;
-			--crimson-deep: #8A1A12;
-			--ochre:        #C08B3C;
-			--indigo:       #1E3A5F;
-			--forest:       #2F5230;
-
-			--font-display: 'Fraunces', 'Times New Roman', serif;
-			--font-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-			--font-mono:    'IBM Plex Mono', 'Courier New', monospace;
-
-			--measure: 62ch;
-			--container: 1280px;
-			--gutter: clamp(24px, 5vw, 64px);
-			--rule: 1px solid var(--line);
-			--rule-strong: 1.5px solid var(--ink);
-		}
-
-		*, *::before, *::after { box-sizing: border-box; }
 		html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+		body { font-feature-settings: "ss01", "ss03", "kern"; }
+		::selection { background: #7c3aed; color: #fff; }
 
-		body {
-			margin: 0;
-			background: var(--paper);
-			color: var(--ink);
-			font-family: var(--font-body);
-			font-weight: 400;
-			font-size: 17px;
-			line-height: 1.55;
-			overflow-x: hidden;
-			font-feature-settings: "ss01", "kern";
+		/* Fraunces axes helpers */
+		.display-expressive { font-variation-settings: "opsz" 144, "wght" 560, "SOFT" 30; }
+		.display-editorial  { font-variation-settings: "opsz" 96,  "wght" 500, "SOFT" 50; }
+		.display-body       { font-variation-settings: "opsz" 24,  "wght" 420, "SOFT" 50; }
+		.display-italic     { font-style: italic; font-variation-settings: "opsz" 144, "wght" 520, "SOFT" 100, "WONK" 1; }
+
+		/* Link underline animations */
+		.link-underline { position: relative; }
+		.link-underline::after {
+			content: "";
+			position: absolute;
+			left: 0; bottom: -2px;
+			width: 100%; height: 1px;
+			background: currentColor;
+			transform-origin: right;
+			transform: scaleX(1);
+			transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1);
 		}
+		.link-underline:hover::after { transform-origin: left; transform: scaleX(0); }
 
-		/* Grain texture overlay — SVG noise */
+		/* Reveal on scroll */
+		.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
+		.reveal.shown { opacity: 1; transform: translateY(0); }
+		@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+		/* Staggered hero entrance */
+		.rise { opacity: 0; transform: translateY(18px); animation: rise 0.9s cubic-bezier(0.2,0.8,0.2,1) forwards; }
+		@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+		/* Paper-frame for embedded widgets */
+		.widget-frame { padding: 10px; background: #F4F4F3; border: 1px solid #E8E8E6; border-radius: 4px; }
+
+		/* Yanib SDK inline elements render as block */
+		yanib-github-profile, yanib-feed, yanib-stats, yanib-portfolio { display: block; }
+
+		/* Subtle grain texture for premium paper feel */
 		body::before {
 			content: "";
-			position: fixed;
-			inset: 0;
-			pointer-events: none;
-			z-index: 1;
-			opacity: 0.05;
+			position: fixed; inset: 0;
+			pointer-events: none; z-index: 1;
+			opacity: 0.03;
 			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 			mix-blend-mode: multiply;
 		}
 
-		a { color: inherit; text-decoration: none; }
-		a.underlined {
-			background-image: linear-gradient(var(--ink), var(--ink));
-			background-position: 0 100%;
-			background-repeat: no-repeat;
-			background-size: 100% 1px;
-			transition: background-size 0.3s ease;
-		}
-		a.underlined:hover { background-size: 0% 1px; background-position: 100% 100%; }
-
-		::selection { background: var(--crimson); color: var(--paper); }
-
-		/* ─────────────────────────────────────────────────────────
-		   Layout primitives
-		───────────────────────────────────────────────────────── */
-		.wrap {
-			max-width: var(--container);
-			margin: 0 auto;
-			padding: 0 var(--gutter);
-			position: relative;
-			z-index: 2;
-		}
-
-		.rule { border: 0; border-top: var(--rule); margin: 0; }
-		.rule-strong { border: 0; border-top: var(--rule-strong); margin: 0; }
-
-		/* ─────────────────────────────────────────────────────────
-		   Masthead — top running bar (volume / issue / date)
-		───────────────────────────────────────────────────────── */
-		.masthead {
-			padding: 22px 0 20px;
-			border-bottom: var(--rule);
-			font-family: var(--font-mono);
-			font-size: 11.5px;
-			letter-spacing: 0.04em;
-			color: var(--ink-soft);
-		}
-		.masthead-row {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 24px;
-			text-transform: uppercase;
-		}
-		.masthead-brand {
-			font-family: var(--font-display);
-			font-weight: 600;
-			font-style: italic;
-			font-size: 18px;
-			letter-spacing: -0.01em;
-			color: var(--ink);
-			text-transform: none;
-			font-feature-settings: "ss01";
-		}
-		.masthead-brand .dot { color: var(--crimson); }
-		.masthead-meta { display: flex; gap: 28px; }
-		.masthead-meta span:not(:last-child)::after {
-			content: "·";
-			margin-left: 28px;
-			color: var(--muted-soft);
-		}
-		@media (max-width: 720px) {
-			.masthead-meta { display: none; }
-		}
-
-		/* ─────────────────────────────────────────────────────────
-		   Primary nav
-		───────────────────────────────────────────────────────── */
-		.nav-primary {
-			position: sticky;
-			top: 0;
-			z-index: 50;
-			background: rgba(245, 242, 236, 0.86);
-			backdrop-filter: blur(10px);
-			-webkit-backdrop-filter: blur(10px);
-			border-bottom: var(--rule);
-		}
-		.nav-primary-inner {
-			display: flex;
-			align-items: baseline;
-			justify-content: space-between;
-			padding: 14px 0;
-			gap: 28px;
-		}
-		.nav-title {
-			font-family: var(--font-display);
-			font-weight: 600;
-			font-size: 17px;
-			letter-spacing: -0.015em;
-			font-feature-settings: "ss01";
-		}
-		.nav-title .surname { font-style: italic; }
-		.nav-links { display: flex; gap: 22px; list-style: none; padding: 0; margin: 0; }
-		.nav-links a {
-			font-size: 13px;
-			color: var(--ink-soft);
-			letter-spacing: 0.01em;
-			position: relative;
-			padding: 4px 0;
-		}
-		.nav-links a::before {
-			content: "§ ";
-			font-family: var(--font-mono);
-			font-size: 10px;
-			color: var(--crimson);
-			margin-right: 2px;
-		}
-		.nav-links a:hover { color: var(--ink); }
-		@media (max-width: 860px) {
-			.nav-links { display: none; }
-		}
-
-		/* ─────────────────────────────────────────────────────────
-		   Hero / Front matter
-		───────────────────────────────────────────────────────── */
-		.hero {
-			padding: clamp(48px, 10vh, 110px) 0 clamp(40px, 8vh, 80px);
-			position: relative;
-		}
-		.hero-layout {
-			display: grid;
-			grid-template-columns: 1.25fr 1fr;
-			gap: clamp(28px, 5vw, 80px);
-			align-items: end;
-		}
-		@media (max-width: 980px) {
-			.hero-layout { grid-template-columns: 1fr; gap: 48px; }
-		}
-		.hero-eyebrow {
-			font-family: var(--font-mono);
-			font-size: 11.5px;
-			letter-spacing: 0.12em;
-			text-transform: uppercase;
-			color: var(--muted);
-			margin-bottom: 18px;
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-		.hero-eyebrow::before {
-			content: "";
-			width: 28px;
-			height: 1px;
-			background: var(--crimson);
-		}
-		.hero-name {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 144, "wght" 580, "SOFT" 25;
-			font-size: clamp(56px, 11vw, 168px);
-			line-height: 0.92;
-			letter-spacing: -0.035em;
-			margin: 0;
-			color: var(--ink);
-			font-feature-settings: "ss01", "swsh", "liga";
-		}
-		.hero-name .given {
-			display: block;
-			font-weight: 380;
-			font-size: 0.58em;
-			letter-spacing: -0.015em;
-			color: var(--muted);
-			margin-bottom: 0.08em;
-		}
-		.hero-name .surname {
-			display: block;
-			font-style: italic;
-			font-variation-settings: "opsz" 144, "wght" 620, "SOFT" 50, "WONK" 1;
-		}
-		.hero-name .period { color: var(--crimson); font-style: normal; }
-
-		.hero-abstract {
-			margin-top: 32px;
-			max-width: 48ch;
-			font-size: 18px;
-			line-height: 1.55;
-			color: var(--ink-soft);
-		}
-		.hero-abstract strong {
-			color: var(--ink);
-			font-weight: 500;
-		}
-		.hero-cta {
-			margin-top: 36px;
-			display: inline-flex;
-			align-items: center;
-			gap: 14px;
-			padding: 14px 24px;
-			background: var(--ink);
-			color: var(--paper);
-			font-family: var(--font-body);
-			font-size: 14px;
-			font-weight: 500;
-			letter-spacing: 0.02em;
-			border: 1px solid var(--ink);
-			transition: all 0.2s ease;
-		}
-		.hero-cta:hover {
-			background: var(--crimson);
-			border-color: var(--crimson);
-			transform: translateY(-1px);
-		}
-		.hero-cta .arrow { font-family: var(--font-mono); transition: transform 0.2s ease; }
-		.hero-cta:hover .arrow { transform: translateX(4px); }
-
-		/* Right column: github profile card */
-		.hero-side {
-			position: relative;
-			padding-top: 12px;
-		}
-		.hero-side-label {
-			font-family: var(--font-mono);
-			font-size: 11px;
-			letter-spacing: 0.1em;
-			text-transform: uppercase;
-			color: var(--muted);
-			margin-bottom: 16px;
-			display: flex;
-			align-items: center;
-			gap: 8px;
-		}
-		.hero-side-label::before {
-			content: "※";
-			color: var(--crimson);
-			font-size: 14px;
-		}
-
-		/* Wrap Yanib widgets in a paper frame that matches the aesthetic */
-		.paper-frame {
-			padding: 8px;
-			background: var(--paper-deeper);
-			border: var(--rule);
-		}
-		.paper-frame yanib-github-profile,
-		.paper-frame yanib-feed,
-		.paper-frame yanib-stats,
-		.paper-frame yanib-portfolio { display: block; }
-
-		/* ─────────────────────────────────────────────────────────
-		   Section machinery
-		───────────────────────────────────────────────────────── */
-		.section {
-			padding: clamp(60px, 10vh, 120px) 0;
-			position: relative;
-		}
-		.section-head {
-			display: grid;
-			grid-template-columns: auto 1fr;
-			align-items: baseline;
-			gap: 24px;
-			margin-bottom: clamp(36px, 5vh, 60px);
-			padding-bottom: 18px;
-			border-bottom: var(--rule);
-		}
-		.section-num {
-			font-family: var(--font-mono);
-			font-size: 13px;
-			letter-spacing: 0.08em;
-			color: var(--crimson);
-			text-transform: uppercase;
-		}
-		.section-title {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 48, "wght" 500;
-			font-size: clamp(32px, 5.2vw, 60px);
-			line-height: 1;
-			letter-spacing: -0.025em;
-			margin: 0;
-			color: var(--ink);
-			font-feature-settings: "ss01";
-		}
-		.section-title em {
-			font-style: italic;
-			font-variation-settings: "opsz" 48, "wght" 500, "SOFT" 50;
-			color: var(--crimson);
-		}
-
-		/* ─────────────────────────────────────────────────────────
-		   §01 About
-		───────────────────────────────────────────────────────── */
-		.about-grid {
-			display: grid;
-			grid-template-columns: 1fr 1.4fr;
-			gap: clamp(32px, 6vw, 96px);
-			align-items: start;
-		}
-		@media (max-width: 820px) {
-			.about-grid { grid-template-columns: 1fr; }
-		}
-		.portrait-wrap {
-			position: relative;
-		}
-		.portrait-wrap::before {
-			content: "FIG. 1";
-			position: absolute;
-			top: -22px;
-			left: 0;
-			font-family: var(--font-mono);
-			font-size: 10.5px;
-			letter-spacing: 0.14em;
-			color: var(--muted);
-		}
-		.portrait-wrap::after {
-			content: "B. DHAKAL, PORTRAIT";
-			position: absolute;
-			bottom: -22px;
-			left: 0;
-			font-family: var(--font-mono);
-			font-size: 10.5px;
-			letter-spacing: 0.14em;
-			color: var(--muted);
-		}
-		.portrait {
-			width: 100%;
-			aspect-ratio: 4 / 5;
-			object-fit: cover;
-			filter: sepia(0.08) saturate(0.95) contrast(1.02);
-			background: var(--cream);
-			display: block;
-		}
-		.portrait-frame {
-			padding: 10px;
-			background: var(--paper-deeper);
-			border: var(--rule);
-			box-shadow: 0 1px 0 var(--line);
-		}
-		.about-prose {
-			padding-top: 6px;
-		}
-		.about-prose .lead {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 24, "wght" 400;
-			font-size: clamp(20px, 2.2vw, 26px);
-			line-height: 1.4;
-			letter-spacing: -0.015em;
-			margin: 0 0 22px;
-			color: var(--ink);
-		}
-		.about-prose .lead::first-letter {
-			float: left;
-			font-size: 4.6em;
-			line-height: 0.85;
-			padding: 0.12em 0.1em 0 0;
-			font-weight: 600;
-			font-variation-settings: "opsz" 144, "wght" 700;
-			color: var(--crimson);
-		}
-		.about-prose p {
-			font-size: 16px;
-			line-height: 1.6;
-			color: var(--ink-soft);
-			margin: 0 0 18px;
-		}
-		.about-marginalia {
-			margin-top: 32px;
-			padding-top: 22px;
-			border-top: var(--rule);
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-			gap: 20px;
-		}
-		.marginalia-item { font-family: var(--font-mono); font-size: 12.5px; line-height: 1.6; }
-		.marginalia-item .label {
-			display: block;
-			font-size: 10.5px;
-			letter-spacing: 0.1em;
-			text-transform: uppercase;
-			color: var(--muted);
-			margin-bottom: 4px;
-		}
-		.marginalia-item .value { color: var(--ink); font-weight: 500; }
-
-		/* ─────────────────────────────────────────────────────────
-		   §02 Now — live Yanib embeds
-		───────────────────────────────────────────────────────── */
-		.now-layout {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: clamp(24px, 4vw, 48px);
-			align-items: start;
-		}
-		@media (max-width: 900px) {
-			.now-layout { grid-template-columns: 1fr; }
-		}
-		.now-note {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 24, "wght" 400;
-			font-style: italic;
-			font-size: 22px;
-			line-height: 1.45;
-			color: var(--ink-soft);
-			margin: 0 0 24px;
-			max-width: 38ch;
-		}
-		.now-caption {
-			font-family: var(--font-mono);
-			font-size: 11px;
-			letter-spacing: 0.1em;
-			text-transform: uppercase;
-			color: var(--muted);
-			margin-top: 14px;
-			display: block;
-		}
-		.now-caption .pulse {
-			display: inline-block;
-			width: 8px; height: 8px;
-			border-radius: 50%;
-			background: var(--crimson);
-			margin-right: 7px;
-			vertical-align: 1px;
-			animation: pulse 2s ease-in-out infinite;
-		}
-		@keyframes pulse {
-			0%, 100% { opacity: 1; transform: scale(1); }
-			50% { opacity: 0.5; transform: scale(0.8); }
-		}
-
-		/* ─────────────────────────────────────────────────────────
-		   §03 Education + §04 Experience — timeline cards
-		───────────────────────────────────────────────────────── */
-		.entry-list { display: flex; flex-direction: column; }
-		.entry {
-			display: grid;
-			grid-template-columns: 160px 1fr;
-			gap: clamp(20px, 4vw, 48px);
-			padding: 32px 0;
-			border-bottom: var(--rule);
-			align-items: start;
-		}
-		.entry:last-child { border-bottom: none; }
-		.entry-period {
-			font-family: var(--font-mono);
-			font-size: 12.5px;
-			color: var(--muted);
-			letter-spacing: 0.03em;
-			text-transform: uppercase;
-		}
-		.entry-period .dash { color: var(--crimson); }
-		.entry-body h3 {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 36, "wght" 500;
-			font-size: clamp(22px, 2.4vw, 30px);
-			line-height: 1.15;
-			letter-spacing: -0.015em;
-			margin: 0 0 6px;
-		}
-		.entry-body .org {
-			font-size: 15px;
-			color: var(--ink-soft);
-			margin-bottom: 4px;
-		}
-		.entry-body .org em {
-			font-family: var(--font-display);
-			font-style: italic;
-			color: var(--crimson);
-		}
-		.entry-body .place {
-			font-family: var(--font-mono);
-			font-size: 12px;
-			color: var(--muted);
-			letter-spacing: 0.04em;
-			text-transform: uppercase;
-			margin-bottom: 16px;
-		}
-		.entry-body ul {
-			margin: 14px 0 0;
-			padding: 0;
-			list-style: none;
-		}
-		.entry-body ul li {
-			position: relative;
-			padding-left: 22px;
-			margin-bottom: 10px;
-			font-size: 15.5px;
-			line-height: 1.55;
-			color: var(--ink-soft);
-		}
-		.entry-body ul li::before {
-			content: "";
-			position: absolute;
-			top: 0.7em;
-			left: 0;
-			width: 14px;
-			height: 1px;
-			background: var(--crimson);
-		}
-		.entry-tags {
-			margin-top: 16px;
-			display: flex;
-			flex-wrap: wrap;
-			gap: 6px;
-		}
-		.chip {
-			font-family: var(--font-mono);
-			font-size: 11px;
-			color: var(--ink-soft);
-			padding: 4px 10px;
-			border: var(--rule);
-			border-radius: 2px;
-			letter-spacing: 0.02em;
-			background: var(--paper-deeper);
-		}
-		@media (max-width: 680px) {
-			.entry { grid-template-columns: 1fr; gap: 12px; }
-		}
-
-		/* ─────────────────────────────────────────────────────────
-		   §05 Research — publications + articles
-		───────────────────────────────────────────────────────── */
-		.research-layout {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: clamp(28px, 5vw, 64px);
-		}
-		@media (max-width: 860px) { .research-layout { grid-template-columns: 1fr; } }
-		.subsection-title {
-			font-family: var(--font-mono);
-			font-size: 11.5px;
-			letter-spacing: 0.14em;
-			text-transform: uppercase;
-			color: var(--crimson);
-			margin: 0 0 24px;
-			display: flex;
-			align-items: center;
-			gap: 10px;
-		}
-		.subsection-title::after {
-			content: "";
-			flex: 1;
-			height: 1px;
-			background: var(--line);
-		}
-		.citation {
-			padding: 20px 0;
-			border-bottom: var(--rule);
-		}
-		.citation:last-child { border-bottom: none; }
-		.citation h4 {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 30, "wght" 500;
-			font-size: 19px;
-			line-height: 1.3;
-			letter-spacing: -0.01em;
-			margin: 0 0 8px;
-		}
-		.citation .cite-meta {
-			font-family: var(--font-mono);
-			font-size: 11.5px;
-			letter-spacing: 0.04em;
-			text-transform: uppercase;
-			color: var(--muted);
-			margin-bottom: 10px;
-		}
-		.citation .cite-meta .status {
-			background: var(--ochre);
-			color: var(--paper);
-			padding: 2px 8px;
-			border-radius: 2px;
-			margin-left: 8px;
-		}
-		.citation p {
-			font-size: 15px;
-			line-height: 1.55;
-			color: var(--ink-soft);
-			margin: 0 0 10px;
-		}
-		.citation .cite-doi {
-			font-family: var(--font-mono);
-			font-size: 11.5px;
-			color: var(--muted);
-			letter-spacing: 0.02em;
-		}
-		.citation .tags {
-			margin-top: 10px;
-			display: flex;
-			flex-wrap: wrap;
-			gap: 6px;
-		}
-
-		/* ─────────────────────────────────────────────────────────
-		   §06 Shipping — Yanib portfolio + GitHub projects
-		───────────────────────────────────────────────────────── */
-		.shipping-intro {
-			display: grid;
-			grid-template-columns: 1fr 2fr;
-			gap: clamp(24px, 5vw, 64px);
-			margin-bottom: 48px;
-			align-items: start;
-		}
-		@media (max-width: 820px) { .shipping-intro { grid-template-columns: 1fr; } }
-		.shipping-intro .caption {
-			font-family: var(--font-mono);
-			font-size: 12.5px;
-			letter-spacing: 0.08em;
-			text-transform: uppercase;
-			color: var(--muted);
-		}
-		.shipping-intro p {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 24, "wght" 400;
-			font-size: clamp(18px, 2vw, 22px);
-			line-height: 1.45;
-			color: var(--ink-soft);
-			margin: 0;
-		}
-
-		.projects-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-			gap: 1px;
-			background: var(--line);
-			border: var(--rule);
-			margin-top: 56px;
-		}
-		.project-card {
-			background: var(--paper);
-			padding: 28px;
-			display: flex;
-			flex-direction: column;
-			transition: background 0.25s ease;
-		}
-		.project-card:hover { background: var(--paper-deeper); }
-		.project-card .pc-num {
-			font-family: var(--font-mono);
-			font-size: 11px;
-			letter-spacing: 0.1em;
-			color: var(--crimson);
-			margin-bottom: 14px;
-		}
-		.project-card h4 {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 36, "wght" 500;
-			font-size: 22px;
-			line-height: 1.2;
-			letter-spacing: -0.015em;
-			margin: 0 0 10px;
-		}
-		.project-card p {
-			font-size: 14.5px;
-			line-height: 1.55;
-			color: var(--ink-soft);
-			margin: 0 0 18px;
-			flex: 1;
-		}
-		.project-card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-		.project-card .pc-link {
-			font-family: var(--font-mono);
-			font-size: 12px;
-			letter-spacing: 0.06em;
-			text-transform: uppercase;
-			color: var(--ink);
-			display: inline-flex;
-			align-items: center;
-			gap: 8px;
-			padding-top: 14px;
-			border-top: var(--rule);
-			transition: color 0.2s ease;
-		}
-		.project-card .pc-link:hover { color: var(--crimson); }
-		.project-card .pc-link .arrow { transition: transform 0.2s ease; }
-		.project-card .pc-link:hover .arrow { transform: translate(3px, -3px); }
-
-		/* ─────────────────────────────────────────────────────────
-		   §07 Awards
-		───────────────────────────────────────────────────────── */
-		.awards-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-			gap: 1px;
-			background: var(--line);
-			border: var(--rule);
-		}
-		.award {
-			background: var(--paper);
-			padding: 28px 24px;
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
-		}
-		.award .year {
-			font-family: var(--font-mono);
-			font-size: 11.5px;
-			letter-spacing: 0.1em;
-			color: var(--crimson);
-		}
-		.award h3 {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 24, "wght" 500;
-			font-size: 19px;
-			line-height: 1.25;
-			letter-spacing: -0.01em;
-			margin: 0;
-		}
-		.award p {
-			font-size: 14px;
-			line-height: 1.5;
-			color: var(--ink-soft);
-			margin: 0;
-		}
-
-		/* ─────────────────────────────────────────────────────────
-		   §08 Toolkit (skills) — typographic, no icon soup
-		───────────────────────────────────────────────────────── */
-		.toolkit {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-			gap: clamp(24px, 4vw, 48px);
-		}
-		.tool-column h3 {
-			font-family: var(--font-mono);
-			font-size: 11.5px;
-			letter-spacing: 0.14em;
-			text-transform: uppercase;
-			color: var(--crimson);
-			margin: 0 0 20px;
-			padding-bottom: 12px;
-			border-bottom: var(--rule);
-		}
-		.tool-list { margin: 0; padding: 0; list-style: none; }
-		.tool-list li {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 24, "wght" 440;
-			font-size: 22px;
-			line-height: 1.6;
-			letter-spacing: -0.01em;
-			color: var(--ink);
-			display: flex;
-			align-items: baseline;
-			justify-content: space-between;
-			gap: 10px;
-		}
-		.tool-list li::after {
-			content: "";
-			flex: 1;
-			height: 1px;
-			background: var(--line-soft);
-			transform: translateY(-4px);
-		}
-		.tool-list li .lvl {
-			font-family: var(--font-mono);
-			font-size: 11px;
-			letter-spacing: 0.1em;
-			color: var(--muted);
-			text-transform: uppercase;
-		}
-
-		/* ─────────────────────────────────────────────────────────
-		   §09 Colophon (contact)
-		───────────────────────────────────────────────────────── */
-		.colophon {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: clamp(32px, 6vw, 80px);
-			align-items: end;
-		}
-		@media (max-width: 760px) { .colophon { grid-template-columns: 1fr; } }
-		.colophon-quote {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 144, "wght" 380, "SOFT" 50;
-			font-size: clamp(32px, 5.5vw, 62px);
-			line-height: 1;
-			letter-spacing: -0.025em;
-			margin: 0;
-		}
-		.colophon-quote em {
-			font-style: italic;
-			color: var(--crimson);
-			font-variation-settings: "opsz" 144, "wght" 380, "SOFT" 100, "WONK" 1;
-		}
-		.contact-list { list-style: none; padding: 0; margin: 0; }
-		.contact-list li {
-			padding: 18px 0;
-			border-bottom: var(--rule);
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 20px;
-			font-size: 16px;
-		}
-		.contact-list li:first-child { border-top: var(--rule); }
-		.contact-list .label {
-			font-family: var(--font-mono);
-			font-size: 11px;
-			letter-spacing: 0.12em;
-			text-transform: uppercase;
-			color: var(--muted);
-		}
-		.contact-list a {
-			font-family: var(--font-display);
-			font-variation-settings: "opsz" 24, "wght" 500;
-			font-size: 18px;
-			color: var(--ink);
-			transition: color 0.2s ease;
-		}
-		.contact-list a:hover { color: var(--crimson); }
-
-		/* ─────────────────────────────────────────────────────────
-		   Footer
-		───────────────────────────────────────────────────────── */
-		footer.colophon-meta {
-			padding: 48px 0 42px;
-			border-top: var(--rule);
-			margin-top: 64px;
-		}
-		.colophon-meta-inner {
-			display: flex;
-			justify-content: space-between;
-			align-items: baseline;
-			gap: 24px;
-			flex-wrap: wrap;
-			font-family: var(--font-mono);
-			font-size: 11.5px;
-			color: var(--muted);
-			letter-spacing: 0.04em;
-			text-transform: uppercase;
-		}
-		.colophon-meta-inner .star { color: var(--crimson); }
-		.colophon-meta-inner a:hover { color: var(--ink); }
-
-		/* ─────────────────────────────────────────────────────────
-		   Entry animations — reveal on scroll
-		───────────────────────────────────────────────────────── */
-		.reveal {
-			opacity: 0;
-			transform: translateY(22px);
-			transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-		}
-		.reveal.shown { opacity: 1; transform: translateY(0); }
-		@media (prefers-reduced-motion: reduce) {
-			.reveal { opacity: 1; transform: none; transition: none; }
-			html { scroll-behavior: auto; }
-		}
-
-		/* Hero-specific entrance */
-		.hero-eyebrow, .hero-name .given, .hero-name .surname, .hero-abstract, .hero-cta, .hero-side {
-			opacity: 0;
-			transform: translateY(18px);
-			animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-		}
-		.hero-eyebrow       { animation-delay: 0.10s; }
-		.hero-name .given   { animation-delay: 0.18s; }
-		.hero-name .surname { animation-delay: 0.28s; }
-		.hero-abstract      { animation-delay: 0.52s; }
-		.hero-cta           { animation-delay: 0.64s; }
-		.hero-side          { animation-delay: 0.76s; }
-		@keyframes rise { to { opacity: 1; transform: translateY(0); } }
-
+		/* Rainbow gradient for Yanib callback (used sparingly) */
+		.violet-grad { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 60%, #5b21b6 100%); }
 	</style>
 </head>
 
-<body>
+<body class="bg-ink-50 text-ink-900 font-sans antialiased">
 
-	<!-- ─────────────────────────────────────────
-	     Masthead
-	──────────────────────────────────────────── -->
-	<div class="masthead">
-		<div class="wrap masthead-row">
-			<div class="masthead-brand">Binaya Dhakal<span class="dot">.</span></div>
-			<div class="masthead-meta">
-				<span>Vol. I — Issue 01</span>
-				<span id="today">West Haven, CT</span>
-				<span>An ongoing record</span>
+	<!-- ══════════════════════════════════════════
+	     Top bar — masthead
+	═══════════════════════════════════════════ -->
+	<div class="relative z-10 border-b border-ink-200">
+		<div class="max-w-6xl mx-auto px-6 md:px-10 py-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-ink-500">
+			<div class="text-ink-900 tracking-normal normal-case text-[14px]"><span class="font-display display-italic">Binaya</span> Dhakal</div>
+			<div class="hidden md:flex items-center gap-6">
+				<span>Founder · Engineer · Researcher</span>
+				<span id="today"></span>
 			</div>
 		</div>
 	</div>
 
-	<!-- ─────────────────────────────────────────
-	     Nav
-	──────────────────────────────────────────── -->
-	<nav class="nav-primary">
-		<div class="wrap nav-primary-inner">
-			<div class="nav-title">Binaya <span class="surname">Dhakal</span></div>
-			<ul class="nav-links">
-				<li><a href="#about">About</a></li>
-				<li><a href="#now">Now</a></li>
-				<li><a href="#education">Education</a></li>
-				<li><a href="#experience">Work</a></li>
-				<li><a href="#research">Research</a></li>
-				<li><a href="#shipping">Shipping</a></li>
-				<li><a href="#toolkit">Toolkit</a></li>
-				<li><a href="#contact">Contact</a></li>
-			</ul>
+	<!-- ══════════════════════════════════════════
+	     Sticky nav
+	═══════════════════════════════════════════ -->
+	<nav class="sticky top-0 z-40 bg-ink-50/80 backdrop-blur-md border-b border-ink-200">
+		<div class="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
+			<a href="#top" class="font-display text-[17px] tracking-tight">
+				Binaya <span class="display-italic">Dhakal</span>
+			</a>
+			<div class="hidden md:flex items-center gap-8 text-[13.5px] text-ink-500">
+				<a href="#yanib"      class="hover:text-ink-900 transition-colors">Yanib</a>
+				<a href="#work"       class="hover:text-ink-900 transition-colors">Work</a>
+				<a href="#research"   class="hover:text-ink-900 transition-colors">Research</a>
+				<a href="#education"  class="hover:text-ink-900 transition-colors">Education</a>
+				<a href="#toolkit"    class="hover:text-ink-900 transition-colors">Toolkit</a>
+				<a href="#contact"    class="hover:text-ink-900 transition-colors">Contact</a>
+			</div>
+			<a href="assets/download/resume.pdf" download
+				class="inline-flex items-center gap-2 rounded-md bg-ink-900 text-ink-50 px-4 py-2 text-[13px] font-medium hover:bg-yanib-600 transition-colors">
+				Résumé
+				<svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none"><path d="M8 2v10m0 0l4-4m-4 4l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+			</a>
 		</div>
 	</nav>
 
-	<!-- ─────────────────────────────────────────
-	     Hero / Front matter
-	──────────────────────────────────────────── -->
-	<section class="hero">
-		<div class="wrap hero-layout">
-			<div>
-				<div class="hero-eyebrow">A practitioner's notebook — AI/ML</div>
-				<h1 class="hero-name">
-					<span class="given">Binaya</span>
-					<span class="surname">Dhakal<span class="period">.</span></span>
-				</h1>
-				<p class="hero-abstract">
-					<strong>AI/ML engineer and researcher</strong> based in West Haven, CT. Currently pursuing a Master's in Data Science at the University of New Haven while working on transformer-based vision models, retrieval-augmented LLM systems, and the occasional piece of shipping software.
-				</p>
-				<a href="assets/download/resume.pdf" class="hero-cta" download>
-					<span>Download résumé</span>
-					<span class="arrow">↓</span>
-				</a>
-			</div>
-			<aside class="hero-side">
-				<div class="hero-side-label">Signal from the field</div>
-				<div class="paper-frame">
-					<yanib-github-profile user="binaydhakal" theme="light"></yanib-github-profile>
-				</div>
-			</aside>
-		</div>
-	</section>
+	<!-- ══════════════════════════════════════════
+	     Hero
+	═══════════════════════════════════════════ -->
+	<section id="top" class="relative z-10 pt-16 md:pt-28 pb-20 md:pb-32">
+		<div class="max-w-6xl mx-auto px-6 md:px-10">
 
-	<!-- ─────────────────────────────────────────
-	     §01 — About
-	──────────────────────────────────────────── -->
-	<section class="section" id="about">
-		<div class="wrap">
-			<div class="section-head reveal">
-				<div class="section-num">§ 01  —  About</div>
-				<h2 class="section-title">A brief <em>introduction</em></h2>
-			</div>
+			<div class="grid lg:grid-cols-[1.3fr_1fr] gap-16 lg:gap-20 items-end">
 
-			<div class="about-grid reveal">
-				<div class="portrait-wrap">
-					<div class="portrait-frame">
-						<img class="portrait" src="assets/images/about/binaya-profile.jpg" alt="Binaya Dhakal">
-					</div>
-				</div>
-				<div class="about-prose">
-					<p class="lead">
-						I build AI systems that have to actually work in production — from multilingual sentiment pipelines to transformer-based medical imaging models — and I treat the boundary between research and shipping engineering as a place to make interesting things, not a wall.
-					</p>
-					<p>
-						My day-to-day sits between a research lab and an IDE. At the University of New Haven, I work on computational biology and business modeling using dimensionality reduction, autoencoders, and variational methods. Before that, I spent three years as a Senior Software Engineer at Danphe Software Labs, shipping full-stack products and embedding ML into them — cyber-attack detection with SVM/CNN/RNN ensembles, workplace-analytics engines built on questionnaires, MERN stacks fronted by real users.
-					</p>
-					<p>
-						I read papers. I ship code. I care about the craft of both. If the gap between them feels wide, that's usually where the interesting problems live.
-					</p>
-
-					<div class="about-marginalia">
-						<div class="marginalia-item">
-							<span class="label">Locus</span>
-							<span class="value">West Haven, CT, USA</span>
-						</div>
-						<div class="marginalia-item">
-							<span class="label">Dispatch</span>
-							<span class="value">binaydhakal35@gmail.com</span>
-						</div>
-						<div class="marginalia-item">
-							<span class="label">Telegram</span>
-							<span class="value">+1 475-201-5355</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─────────────────────────────────────────
-	     §02 — Now (live Yanib embeds)
-	──────────────────────────────────────────── -->
-	<section class="section" id="now">
-		<div class="wrap">
-			<div class="section-head reveal">
-				<div class="section-num">§ 02  —  Now</div>
-				<h2 class="section-title">What's <em>shipping</em>, live</h2>
-			</div>
-
-			<p class="now-note reveal">
-				Auto-updated from my repositories via <a class="underlined" href="https://www.yanib.dev" target="_blank" rel="noopener">Yanib</a> — the release-notes platform I build on the side. Think of it as a live changelog for a working scientist.
-			</p>
-
-			<div class="now-layout reveal">
 				<div>
-					<div class="subsection-title">Recent releases</div>
-					<div class="paper-frame">
-						<yanib-feed user="binaydhakal" theme="light" limit="5"></yanib-feed>
+					<div class="rise font-mono text-[11px] uppercase tracking-[0.14em] text-ink-500 mb-6 flex items-center gap-3" style="animation-delay: 0.05s;">
+						<span class="inline-block w-8 h-px bg-yanib-500"></span>
+						<span>Lehi, Utah — Founder's Notebook, 2026</span>
 					</div>
-					<div class="now-caption"><span class="pulse"></span>Updated in real time</div>
-				</div>
-				<div>
-					<div class="subsection-title">Shipping metrics</div>
-					<div class="paper-frame">
-						<yanib-stats user="binaydhakal" theme="light" period="all"></yanib-stats>
+
+					<h1 class="font-display display-expressive text-[64px] sm:text-[88px] md:text-[112px] lg:text-[136px] leading-[0.9] tracking-tightest text-ink-900">
+						<span class="rise block font-normal text-[0.56em] text-ink-500 tracking-tight" style="animation-delay: 0.12s;">Binaya</span>
+						<span class="rise block display-italic" style="animation-delay: 0.22s;">Dhakal<span class="text-yanib-500 not-italic">.</span></span>
+					</h1>
+
+					<div class="rise mt-10 flex flex-wrap items-center gap-x-6 gap-y-3" style="animation-delay: 0.38s;">
+						<span class="inline-flex items-center gap-2 text-[15px] text-ink-700">
+							<span class="w-1.5 h-1.5 rounded-full bg-yanib-500"></span>
+							<span>Founder &amp; CEO, <a href="https://www.yanib.dev" target="_blank" rel="noopener" class="link-underline font-medium">Yanib</a></span>
+						</span>
+						<span class="hidden sm:inline-block w-px h-4 bg-ink-300"></span>
+						<span class="text-[15px] text-ink-700">AI Software Engineer at Fluid</span>
+						<span class="hidden sm:inline-block w-px h-4 bg-ink-300"></span>
+						<span class="text-[15px] text-ink-700">Published Researcher</span>
 					</div>
-					<div class="now-caption"><span class="pulse"></span>Releases, entries, streak</div>
+
+					<p class="rise mt-8 text-[17px] md:text-[18px] leading-relaxed text-ink-600 max-w-[56ch]" style="animation-delay: 0.50s;">
+						I build AI-powered developer tools and production-grade ML systems. I founded <strong class="text-ink-900 font-medium">Yanib</strong> to give dev teams a better way to ship release notes, lead the Themes &amp; AI team at <strong class="text-ink-900 font-medium">Fluid</strong>, and publish research on biomedical AI at the <strong class="text-ink-900 font-medium">University of New Haven</strong>.
+					</p>
+
+					<div class="rise mt-10 flex flex-wrap items-center gap-3" style="animation-delay: 0.62s;">
+						<a href="https://www.yanib.dev" target="_blank" rel="noopener"
+							class="inline-flex items-center gap-2 rounded-full bg-ink-900 text-ink-50 px-6 py-3 text-[14px] font-medium hover:bg-yanib-600 transition-all">
+							Visit Yanib
+							<svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						</a>
+						<a href="#contact"
+							class="inline-flex items-center gap-2 rounded-full border border-ink-300 text-ink-900 px-6 py-3 text-[14px] font-medium hover:bg-ink-100 transition-all">
+							Get in touch
+						</a>
+					</div>
 				</div>
+
+				<aside class="rise" style="animation-delay: 0.78s;">
+					<div class="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-500 mb-3 flex items-center gap-2">
+						<span class="inline-block w-1.5 h-1.5 rounded-full bg-yanib-500 animate-pulse"></span>
+						<span>Live from GitHub</span>
+					</div>
+					<div class="widget-frame">
+						<yanib-github-profile user="binaydhakal" theme="light"></yanib-github-profile>
+					</div>
+				</aside>
+
 			</div>
 		</div>
 	</section>
 
-	<!-- ─────────────────────────────────────────
-	     §03 — Education
-	──────────────────────────────────────────── -->
-	<section class="section" id="education">
-		<div class="wrap">
-			<div class="section-head reveal">
-				<div class="section-num">§ 03  —  Education</div>
-				<h2 class="section-title">The <em>record</em> of study</h2>
+	<!-- ══════════════════════════════════════════
+	     Currently — three parallel tracks
+	═══════════════════════════════════════════ -->
+	<section class="relative z-10 border-y border-ink-200 bg-ink-100/50 py-16 md:py-24">
+		<div class="max-w-6xl mx-auto px-6 md:px-10">
+			<div class="reveal font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600 mb-10">§ 01 — Currently</div>
+			<div class="grid md:grid-cols-3 gap-10 md:gap-14">
+
+				<div class="reveal">
+					<div class="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-500 mb-3">Day job</div>
+					<h3 class="font-display display-editorial text-[28px] md:text-[32px] leading-[1.05] tracking-tight mb-3">
+						Leading <span class="display-italic">Themes &amp; AI</span> at Fluid
+					</h3>
+					<p class="text-[14.5px] leading-relaxed text-ink-600">
+						AI Software Engineer driving a modern AI-powered theme engine for a fintech platform. Ruby on Rails, TypeScript, React — and the AI layer stitching them together.
+					</p>
+					<div class="mt-4 font-mono text-[11px] text-ink-400 uppercase tracking-wider">May 2025 — Present · Lehi, UT</div>
+				</div>
+
+				<div class="reveal" style="transition-delay: 0.1s;">
+					<div class="font-mono text-[10.5px] uppercase tracking-[0.14em] text-yanib-600 mb-3">Company</div>
+					<h3 class="font-display display-editorial text-[28px] md:text-[32px] leading-[1.05] tracking-tight mb-3">
+						Founder &amp; CEO of <span class="display-italic text-yanib-600">Yanib</span>
+					</h3>
+					<p class="text-[14.5px] leading-relaxed text-ink-600">
+						An AI-powered release-notes platform for dev teams. Turns commits and PRs into polished changelogs, publishes everywhere, and gives engineers a public shipping record that actually reflects their work.
+					</p>
+					<div class="mt-4 font-mono text-[11px] text-ink-400 uppercase tracking-wider">Founded 2026</div>
+				</div>
+
+				<div class="reveal" style="transition-delay: 0.2s;">
+					<div class="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-500 mb-3">Research</div>
+					<h3 class="font-display display-editorial text-[28px] md:text-[32px] leading-[1.05] tracking-tight mb-3">
+						Published in the <span class="display-italic">Journal of Microbiological Methods</span>
+					</h3>
+					<p class="text-[14.5px] leading-relaxed text-ink-600">
+						First-author paper on multi-compartment microbiome data integration with deep autoencoders for mortality prediction. Research Assistant at the University of New Haven under Prof. Khaled Sayed.
+					</p>
+					<div class="mt-4 font-mono text-[11px] text-ink-400 uppercase tracking-wider">Aug 2024 — Present</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     §02 — Yanib (founder section)
+	═══════════════════════════════════════════ -->
+	<section id="yanib" class="relative z-10 py-24 md:py-32">
+		<div class="max-w-6xl mx-auto px-6 md:px-10">
+
+			<div class="reveal grid md:grid-cols-[auto_1fr] items-baseline gap-6 mb-12 pb-5 border-b border-ink-200">
+				<div class="font-mono text-[12.5px] uppercase tracking-[0.14em] text-yanib-600">§ 02 — Yanib</div>
+				<h2 class="font-display display-editorial text-[44px] sm:text-[56px] md:text-[68px] leading-[0.98] tracking-tightest">
+					The company I'm <span class="display-italic text-yanib-600">building</span>.
+				</h2>
 			</div>
 
-			<div class="entry-list reveal">
-				<article class="entry">
-					<div class="entry-period">Aug 2024 <span class="dash">—</span> Present</div>
-					<div class="entry-body">
-						<h3>Master's in Data Science</h3>
-						<div class="org"><em>University of New Haven</em></div>
-						<div class="place">West Haven, CT, USA</div>
-						<div class="entry-tags">
-							<span class="chip">Python</span>
-							<span class="chip">Artificial Intelligence</span>
-							<span class="chip">Machine Learning</span>
-							<span class="chip">Deep Learning</span>
-							<span class="chip">Bioinformatics</span>
-							<span class="chip">Natural Language Processing</span>
-							<span class="chip">Distributed Data Engineering</span>
+			<div class="reveal grid lg:grid-cols-[1.35fr_1fr] gap-12 lg:gap-20 items-start">
+
+				<div>
+					<p class="font-display display-body text-[22px] md:text-[26px] leading-[1.4] tracking-tight text-ink-800 mb-8">
+						Yanib is an <span class="display-italic text-yanib-600">AI-powered release-notes platform</span> for dev teams and individual engineers — the missing piece between "I shipped something" and "the world knows about it."
+					</p>
+
+					<div class="space-y-5 text-[15.5px] leading-relaxed text-ink-600 max-w-[62ch]">
+						<p>
+							Connect a GitHub or GitLab repo, tag a release, and Yanib generates a clean changelog from your commits and PRs using Claude. A human reviews it, then Yanib publishes everywhere at once — GitHub Releases, a public changelog page, Slack, Discord, email subscribers, and an embeddable widget.
+						</p>
+						<p>
+							For individuals, Yanib goes further: developer profile cards for GitHub READMEs, shipping-stats badges, year-in-review pages, and embeddable feeds for your portfolio. <span class="text-ink-900 font-medium">The widgets on this page are Yanib's own</span> — rendered live from my public shipping history.
+						</p>
+					</div>
+
+					<div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-5">
+						<div>
+							<div class="font-display display-expressive text-[34px] leading-none text-ink-900">7</div>
+							<div class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-500 mt-2">Embeddable widgets</div>
+						</div>
+						<div>
+							<div class="font-display display-expressive text-[34px] leading-none text-ink-900">2</div>
+							<div class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-500 mt-2">Providers (GH / GL)</div>
+						</div>
+						<div>
+							<div class="font-display display-expressive text-[34px] leading-none text-ink-900">13</div>
+							<div class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-500 mt-2">Languages supported</div>
+						</div>
+						<div>
+							<div class="font-display display-expressive text-[34px] leading-none text-ink-900">1-click</div>
+							<div class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-500 mt-2">Publish to all channels</div>
 						</div>
 					</div>
-				</article>
 
-				<article class="entry">
-					<div class="entry-period">Dec 2016 <span class="dash">—</span> Jan 2021</div>
-					<div class="entry-body">
-						<h3>Bachelor in Computer Engineering</h3>
-						<div class="org"><em>Western Regional Campus (WRC)</em></div>
-						<div class="place">Pokhara, Nepal</div>
+					<div class="mt-10 flex flex-wrap gap-3">
+						<a href="https://www.yanib.dev" target="_blank" rel="noopener"
+							class="inline-flex items-center gap-2 rounded-full violet-grad text-white px-6 py-3 text-[14px] font-medium shadow-sm hover:shadow-md transition-shadow">
+							Try Yanib
+							<svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none"><path d="M5 11L11 5M11 5H6M11 5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						</a>
+						<a href="https://www.yanib.dev/u/binaydhakal" target="_blank" rel="noopener"
+							class="inline-flex items-center gap-2 rounded-full border border-ink-300 text-ink-900 px-6 py-3 text-[14px] font-medium hover:bg-ink-100 transition-colors">
+							My public shipping log
+						</a>
 					</div>
-				</article>
+				</div>
+
+				<aside class="space-y-6">
+					<div>
+						<div class="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-500 mb-3 flex items-center gap-2">
+							<span class="inline-block w-1.5 h-1.5 rounded-full bg-yanib-500 animate-pulse"></span>
+							<span>Live shipping feed</span>
+						</div>
+						<div class="widget-frame">
+							<yanib-feed user="binaydhakal" theme="light" limit="5"></yanib-feed>
+						</div>
+					</div>
+
+					<div>
+						<div class="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-500 mb-3 flex items-center gap-2">
+							<span class="inline-block w-1.5 h-1.5 rounded-full bg-yanib-500 animate-pulse"></span>
+							<span>Shipping metrics</span>
+						</div>
+						<div class="widget-frame">
+							<yanib-stats user="binaydhakal" theme="light" period="all"></yanib-stats>
+						</div>
+					</div>
+				</aside>
+
 			</div>
 		</div>
 	</section>
 
-	<!-- ─────────────────────────────────────────
-	     §04 — Experience
-	──────────────────────────────────────────── -->
-	<section class="section" id="experience">
-		<div class="wrap">
-			<div class="section-head reveal">
-				<div class="section-num">§ 04  —  Work</div>
-				<h2 class="section-title">Experience <em>in the field</em></h2>
+	<!-- ══════════════════════════════════════════
+	     §03 — Work / Experience
+	═══════════════════════════════════════════ -->
+	<section id="work" class="relative z-10 py-20 md:py-28 border-t border-ink-200">
+		<div class="max-w-6xl mx-auto px-6 md:px-10">
+
+			<div class="reveal grid md:grid-cols-[auto_1fr] items-baseline gap-6 mb-14 pb-5 border-b border-ink-200">
+				<div class="font-mono text-[12.5px] uppercase tracking-[0.14em] text-yanib-600">§ 03 — Work</div>
+				<h2 class="font-display display-editorial text-[40px] sm:text-[52px] md:text-[60px] leading-[0.98] tracking-tightest">
+					Experience <span class="display-italic">in the field</span>.
+				</h2>
 			</div>
 
-			<div class="entry-list reveal">
-				<article class="entry">
-					<div class="entry-period">Aug 2024 <span class="dash">—</span> Present</div>
-					<div class="entry-body">
-						<h3>Research Assistant</h3>
-						<div class="org"><em>University of New Haven</em></div>
-						<div class="place">West Haven, CT, USA</div>
-						<ul>
-							<li>Computational biology + business modeling using dimensionality reduction techniques</li>
-							<li>Implementing autoencoders and variational autoencoders for downstream tasks</li>
-							<li>Analyzing biological and e-commerce data for improved insights</li>
+			<div class="space-y-10 md:space-y-12">
+
+				<!-- Fluid -->
+				<article class="reveal grid md:grid-cols-[220px_1fr] gap-6 md:gap-12 pb-10 border-b border-ink-200">
+					<div class="font-mono text-[12.5px] text-ink-500 uppercase tracking-[0.05em]">May 2025 <span class="text-yanib-600">—</span> Present</div>
+					<div>
+						<h3 class="font-display display-editorial text-[24px] md:text-[28px] leading-tight tracking-tight mb-1">AI Software Engineer</h3>
+						<div class="text-[15px] text-ink-700 mb-1">Fluid <span class="text-ink-400">· Full-time · On-site</span></div>
+						<div class="font-mono text-[11.5px] uppercase tracking-[0.08em] text-ink-500 mb-5">Lehi, Utah, USA</div>
+						<ul class="space-y-2.5">
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Leading the Themes &amp; AI team, driving development of a modern AI-powered theme-building engine for a fintech/MLM platform.
+							</li>
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Architecting and building full-stack features across Ruby on Rails, TypeScript, and React in the core product.
+							</li>
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Overseeing AI integration strategy and guiding the team in shipping intelligent, scalable features to platform users.
+							</li>
 						</ul>
 					</div>
 				</article>
 
-				<article class="entry">
-					<div class="entry-period">May 2021 <span class="dash">—</span> May 2024</div>
-					<div class="entry-body">
-						<h3>Senior Software Engineer</h3>
-						<div class="org"><em>Danphe Software Labs</em></div>
-						<div class="place">Kathmandu, Nepal</div>
-						<ul>
-							<li>Full-stack development for MLM companies using modern web technologies</li>
-							<li>Workplace experience enhancement systems using questionnaire-based analytics</li>
-							<li>Cyber-attack detection systems combining SVM, CNN, RNN, and NLP techniques</li>
+				<!-- University of New Haven -->
+				<article class="reveal grid md:grid-cols-[220px_1fr] gap-6 md:gap-12 pb-10 border-b border-ink-200">
+					<div class="font-mono text-[12.5px] text-ink-500 uppercase tracking-[0.05em]">Aug 2024 <span class="text-yanib-600">—</span> Present</div>
+					<div>
+						<h3 class="font-display display-editorial text-[24px] md:text-[28px] leading-tight tracking-tight mb-1">Research Assistant</h3>
+						<div class="text-[15px] text-ink-700 mb-1">University of New Haven <span class="text-ink-400">· Part-time · On-site</span></div>
+						<div class="font-mono text-[11.5px] uppercase tracking-[0.08em] text-ink-500 mb-1">West Haven, Connecticut, USA</div>
+						<div class="text-[13px] text-ink-500 italic mb-5">Supervisor: Prof. Khaled Sayed</div>
+						<ul class="space-y-2.5">
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Researching multi-compartment microbiome data integration and its downstream applications in mortality prediction.
+							</li>
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Developed a deep-learning autoencoder combining microbiome and clinical data — <em>published in the Journal of Microbiological Methods</em>.
+							</li>
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Applying NLP and bioinformatics techniques to large-scale healthcare datasets.
+							</li>
 						</ul>
 					</div>
 				</article>
+
+				<!-- Danphe Software Labs -->
+				<article class="reveal grid md:grid-cols-[220px_1fr] gap-6 md:gap-12 pb-10 border-b border-ink-200">
+					<div class="font-mono text-[12.5px] text-ink-500 uppercase tracking-[0.05em]">May 2021 <span class="text-yanib-600">—</span> Jul 2024</div>
+					<div>
+						<h3 class="font-display display-editorial text-[24px] md:text-[28px] leading-tight tracking-tight mb-1">Senior Software Engineer</h3>
+						<div class="text-[15px] text-ink-700 mb-1">Danphe Software Labs <span class="text-ink-400">· Full-time</span></div>
+						<div class="font-mono text-[11.5px] uppercase tracking-[0.08em] text-ink-500 mb-5">Kathmandu, Nepal</div>
+						<ul class="space-y-2.5">
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Architected and shipped enterprise systems handling millions of records for MLM and workplace-analytics platforms.
+							</li>
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Built cybersecurity threat-detection using SVM, CNN, and RNN ensembles to identify and mitigate attack patterns.
+							</li>
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Integrated IBM Watson NLP for text analysis and sentiment-driven insights inside HR tooling.
+							</li>
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Cross-platform mobile apps with React Native + Redux; web with React + TypeScript; backends on Rails &amp; Node with MySQL / Postgres.
+							</li>
+						</ul>
+					</div>
+				</article>
+
+				<!-- Upwork freelance -->
+				<article class="reveal grid md:grid-cols-[220px_1fr] gap-6 md:gap-12">
+					<div class="font-mono text-[12.5px] text-ink-500 uppercase tracking-[0.05em]">Jan 2022 <span class="text-yanib-600">—</span> Jan 2024</div>
+					<div>
+						<h3 class="font-display display-editorial text-[24px] md:text-[28px] leading-tight tracking-tight mb-1">ML Engineer (Freelance)</h3>
+						<div class="text-[15px] text-ink-700 mb-1">Upwork <span class="text-ink-400">· Remote</span></div>
+						<div class="font-mono text-[11.5px] uppercase tracking-[0.08em] text-ink-500 mb-5">Global</div>
+						<ul class="space-y-2.5">
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								GPT-3 based sentiment-analysis pipeline — improved client's customer-satisfaction metric by <strong class="text-ink-900">20%</strong>.
+							</li>
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Deep Q-Learning for autonomous systems — <strong class="text-ink-900">30%</strong> gain in robotic navigation efficiency.
+							</li>
+							<li class="pl-5 relative text-[15px] leading-relaxed text-ink-600">
+								<span class="absolute left-0 top-[0.7em] w-3 h-px bg-yanib-500"></span>
+								Neuroscience-inspired interpretable predictive models for healthcare outcomes — <strong class="text-ink-900">25%</strong> forecast-accuracy boost.
+							</li>
+						</ul>
+					</div>
+				</article>
+
 			</div>
 		</div>
 	</section>
 
-	<!-- ─────────────────────────────────────────
-	     §05 — Research (publications + articles)
-	──────────────────────────────────────────── -->
-	<section class="section" id="research">
-		<div class="wrap">
-			<div class="section-head reveal">
-				<div class="section-num">§ 05  —  Research</div>
-				<h2 class="section-title">Publications &amp; <em>technical writing</em></h2>
+	<!-- ══════════════════════════════════════════
+	     §04 — Research / Publications
+	═══════════════════════════════════════════ -->
+	<section id="research" class="relative z-10 py-20 md:py-28 border-t border-ink-200 bg-ink-100/40">
+		<div class="max-w-6xl mx-auto px-6 md:px-10">
+
+			<div class="reveal grid md:grid-cols-[auto_1fr] items-baseline gap-6 mb-14 pb-5 border-b border-ink-200">
+				<div class="font-mono text-[12.5px] uppercase tracking-[0.14em] text-yanib-600">§ 04 — Research</div>
+				<h2 class="font-display display-editorial text-[40px] sm:text-[52px] md:text-[60px] leading-[0.98] tracking-tightest">
+					Publications &amp; <span class="display-italic">writing</span>.
+				</h2>
 			</div>
 
-			<div class="research-layout reveal">
+			<div class="space-y-8">
+
+				<article class="reveal bg-ink-50 border border-ink-200 rounded-md p-6 md:p-8">
+					<div class="flex flex-wrap items-center gap-3 mb-3">
+						<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600">Journal — 2024</span>
+						<span class="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-50 bg-ink-900 px-2 py-0.5 rounded">First Author</span>
+					</div>
+					<h3 class="font-display display-editorial text-[22px] md:text-[26px] leading-snug tracking-tight mb-3">
+						Integrating multi-compartment microbiome data with clinical parameters enhances mortality prediction using autoencoder
+					</h3>
+					<p class="text-[14.5px] leading-relaxed text-ink-600 mb-4">
+						A deep-learning approach combining multi-compartment microbiome profiles with structured clinical data via an autoencoder, significantly improving downstream mortality prediction. Published in the <em>Journal of Microbiological Methods</em>.
+					</p>
+					<div class="flex flex-wrap items-center gap-3 text-[13px] text-ink-500">
+						<span>Co-authors: Prof. Khaled Sayed · Lakshmi Sai Kishore Savarapu</span>
+						<a href="https://www.sciencedirect.com/science/article/pii/" target="_blank" rel="noopener" class="link-underline text-yanib-600">Read on ScienceDirect ↗</a>
+					</div>
+				</article>
+
+				<article class="reveal bg-ink-50 border border-ink-200 rounded-md p-6 md:p-8">
+					<div class="flex flex-wrap items-center gap-3 mb-3">
+						<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600">Paper</span>
+						<span class="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-900 bg-yanib-100 px-2 py-0.5 rounded">Submitted</span>
+					</div>
+					<h3 class="font-display display-editorial text-[22px] md:text-[26px] leading-snug tracking-tight mb-3">
+						Fracture Detection with Transformer
+					</h3>
+					<p class="text-[14.5px] leading-relaxed text-ink-600">
+						Applying the transformer-based DETR model to predict bounding boxes around bone fractures in medical imaging — treating detection as a set-prediction problem for radiology.
+					</p>
+				</article>
+
+				<article class="reveal bg-ink-50 border border-ink-200 rounded-md p-6 md:p-8">
+					<div class="flex flex-wrap items-center gap-3 mb-3">
+						<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600">Paper</span>
+					</div>
+					<h3 class="font-display display-editorial text-[22px] md:text-[26px] leading-snug tracking-tight mb-3">
+						Effects of Sudarshan Kriya Yoga (SKY) on Stress and Self-Esteem of Medical Doctors
+					</h3>
+					<p class="text-[14.5px] leading-relaxed text-ink-600 mb-2">
+						Collaborated with neuro-medical researchers; sentiment analysis applied to physician self-reports to analyze SKY breathing's impact on stress and self-esteem.
+					</p>
+					<div class="font-mono text-[12px] text-ink-500">DOI: 10.4103/0973-6131.105935</div>
+				</article>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     §05 — Education
+	═══════════════════════════════════════════ -->
+	<section id="education" class="relative z-10 py-20 md:py-28 border-t border-ink-200">
+		<div class="max-w-6xl mx-auto px-6 md:px-10">
+
+			<div class="reveal grid md:grid-cols-[auto_1fr] items-baseline gap-6 mb-14 pb-5 border-b border-ink-200">
+				<div class="font-mono text-[12.5px] uppercase tracking-[0.14em] text-yanib-600">§ 05 — Education</div>
+				<h2 class="font-display display-editorial text-[40px] sm:text-[52px] md:text-[60px] leading-[0.98] tracking-tightest">
+					Academic <span class="display-italic">record</span>.
+				</h2>
+			</div>
+
+			<div class="space-y-10">
+
+				<article class="reveal grid md:grid-cols-[220px_1fr] gap-6 md:gap-12 pb-8 border-b border-ink-200">
+					<div class="font-mono text-[12.5px] text-ink-500 uppercase tracking-[0.05em]">Aug 2024 <span class="text-yanib-600">—</span> Jan 2026</div>
+					<div>
+						<h3 class="font-display display-editorial text-[24px] md:text-[28px] leading-tight tracking-tight mb-1">Master of Science in Data Science</h3>
+						<div class="text-[15px] text-ink-700 mb-1">University of New Haven</div>
+						<div class="font-mono text-[11.5px] uppercase tracking-[0.08em] text-ink-500 mb-5">West Haven, Connecticut, USA</div>
+						<div class="flex flex-wrap gap-2">
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">Artificial Intelligence</span>
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">Machine Learning</span>
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">Deep Learning</span>
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">NLP</span>
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">Bioinformatics</span>
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">Distributed Data Engineering</span>
+						</div>
+					</div>
+				</article>
+
+				<article class="reveal grid md:grid-cols-[220px_1fr] gap-6 md:gap-12">
+					<div class="font-mono text-[12.5px] text-ink-500 uppercase tracking-[0.05em]">Dec 2016 <span class="text-yanib-600">—</span> Jan 2021</div>
+					<div>
+						<h3 class="font-display display-editorial text-[24px] md:text-[28px] leading-tight tracking-tight mb-1">Bachelor of Engineering in Computer Engineering</h3>
+						<div class="text-[15px] text-ink-700 mb-1">Western Regional Campus, Tribhuvan University</div>
+						<div class="font-mono text-[11.5px] uppercase tracking-[0.08em] text-ink-500 mb-2">Pokhara, Nepal</div>
+						<div class="text-[13px] text-ink-500 italic mb-5">3× Merit-Based Scholarship Recipient</div>
+						<div class="flex flex-wrap gap-2">
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">AI</span>
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">Data Structures &amp; Algorithms</span>
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">Machine Learning</span>
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">Software Engineering</span>
+							<span class="font-mono text-[11.5px] px-2.5 py-1 rounded border border-ink-200 bg-ink-100 text-ink-700">Speech &amp; Language Processing</span>
+						</div>
+					</div>
+				</article>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     §06 — Toolkit / Skills
+	═══════════════════════════════════════════ -->
+	<section id="toolkit" class="relative z-10 py-20 md:py-28 border-t border-ink-200 bg-ink-100/40">
+		<div class="max-w-6xl mx-auto px-6 md:px-10">
+
+			<div class="reveal grid md:grid-cols-[auto_1fr] items-baseline gap-6 mb-14 pb-5 border-b border-ink-200">
+				<div class="font-mono text-[12.5px] uppercase tracking-[0.14em] text-yanib-600">§ 06 — Toolkit</div>
+				<h2 class="font-display display-editorial text-[40px] sm:text-[52px] md:text-[60px] leading-[0.98] tracking-tightest">
+					Tools of <span class="display-italic">the trade</span>.
+				</h2>
+			</div>
+
+			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10 reveal">
+
 				<div>
-					<div class="subsection-title">Published &amp; under review</div>
-
-					<article class="citation">
-						<div class="cite-meta">Journal — 2023</div>
-						<h4>Effects of Sudarshan Kriya Yoga (SKY) on the stress and self-esteem of medical doctors</h4>
-						<p>Collaborated with neuro-medical researchers to analyze the benefits of SKY breathing techniques using sentiment analysis on physician responses.</p>
-						<div class="cite-doi">DOI: 10.4103/0973-6131.105935</div>
-						<div class="tags">
-							<span class="chip">Sentiment Analysis</span>
-							<span class="chip">Medical Research</span>
-							<span class="chip">Healthcare</span>
-						</div>
-					</article>
-
-					<article class="citation">
-						<div class="cite-meta">Conference<span class="status">Submitted</span></div>
-						<h4>Fracture Detection With Transformer</h4>
-						<p>Applying DETR — a transformer-based object-detection architecture — to predict bounding boxes around fractures in medical imaging.</p>
-						<div class="tags">
-							<span class="chip">DETR</span>
-							<span class="chip">Computer Vision</span>
-							<span class="chip">Healthcare</span>
-						</div>
-					</article>
+					<h3 class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600 pb-2 mb-4 border-b border-ink-200">Languages</h3>
+					<ul class="space-y-1.5 font-display display-body text-[18px] tracking-tight text-ink-900">
+						<li>Python · R · Ruby</li>
+						<li>JavaScript · TypeScript · PHP</li>
+						<li>C · C++ · Java</li>
+					</ul>
 				</div>
 
 				<div>
-					<div class="subsection-title">Technical articles</div>
+					<h3 class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600 pb-2 mb-4 border-b border-ink-200">AI &amp; ML</h3>
+					<ul class="space-y-1.5 font-display display-body text-[18px] tracking-tight text-ink-900">
+						<li>PyTorch · TensorFlow</li>
+						<li>Scikit-Learn · OpenCV · NLTK</li>
+						<li>Hugging Face · LLMs</li>
+						<li>Deep Q-Learning · DETR · CNN · RNN</li>
+					</ul>
+				</div>
 
-					<article class="citation">
-						<h4>Markov Decision Processes, from scratch</h4>
-						<p>Grounding the fundamentals of reinforcement learning — state, action, reward, policy — through the MDP lens, with worked examples.</p>
-						<div class="tags">
-							<span class="chip">Reinforcement Learning</span>
-							<span class="chip">Decision Theory</span>
+				<div>
+					<h3 class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600 pb-2 mb-4 border-b border-ink-200">Web &amp; Mobile</h3>
+					<ul class="space-y-1.5 font-display display-body text-[18px] tracking-tight text-ink-900">
+						<li>React · React Native · Redux</li>
+						<li>Next.js · Node.js</li>
+						<li>Ruby on Rails · Django · Flask</li>
+					</ul>
+				</div>
+
+				<div>
+					<h3 class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600 pb-2 mb-4 border-b border-ink-200">Data &amp; Databases</h3>
+					<ul class="space-y-1.5 font-display display-body text-[18px] tracking-tight text-ink-900">
+						<li>PostgreSQL · MySQL</li>
+						<li>MongoDB</li>
+					</ul>
+				</div>
+
+				<div>
+					<h3 class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600 pb-2 mb-4 border-b border-ink-200">Cloud &amp; DevOps</h3>
+					<ul class="space-y-1.5 font-display display-body text-[18px] tracking-tight text-ink-900">
+						<li>AWS (Lambda · CloudFront)</li>
+						<li>GCP · Heroku · Firebase</li>
+						<li>CDN · Load Balancing</li>
+						<li>Docker · Linux · Bash · Git</li>
+					</ul>
+				</div>
+
+				<div>
+					<h3 class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600 pb-2 mb-4 border-b border-ink-200">Other</h3>
+					<ul class="space-y-1.5 font-display display-body text-[18px] tracking-tight text-ink-900">
+						<li>Ethereum / Blockchain</li>
+						<li>Jira · LaTeX</li>
+						<li>App Store &amp; Play Store deployment</li>
+						<li>In-App Purchases</li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     §07 — Recognition (Awards + Certs)
+	═══════════════════════════════════════════ -->
+	<section class="relative z-10 py-20 md:py-28 border-t border-ink-200">
+		<div class="max-w-6xl mx-auto px-6 md:px-10">
+
+			<div class="reveal grid md:grid-cols-[auto_1fr] items-baseline gap-6 mb-14 pb-5 border-b border-ink-200">
+				<div class="font-mono text-[12.5px] uppercase tracking-[0.14em] text-yanib-600">§ 07 — Recognition</div>
+				<h2 class="font-display display-editorial text-[40px] sm:text-[52px] md:text-[60px] leading-[0.98] tracking-tightest">
+					Honors, awards &amp; <span class="display-italic">certifications</span>.
+				</h2>
+			</div>
+
+			<div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+
+				<div class="reveal">
+					<h3 class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600 pb-3 mb-5 border-b border-ink-200">Honors &amp; Awards</h3>
+					<div class="space-y-5">
+						<div class="grid grid-cols-[auto_1fr] gap-5 pb-4 border-b border-ink-200">
+							<div class="font-mono text-[11.5px] uppercase tracking-wider text-ink-500 mt-1">2024 — 2026</div>
+							<div>
+								<div class="font-display display-editorial text-[19px] leading-snug tracking-tight mb-1">Fully Funded Master's Degree</div>
+								<div class="text-[14px] text-ink-600 leading-relaxed">Research Assistantship at the University of New Haven covering full tuition for the M.S. in Data Science.</div>
+							</div>
 						</div>
-					</article>
-
-					<article class="citation">
-						<h4>Activation functions, and why they matter</h4>
-						<p>A walkthrough of the key properties governing neural network activations and the trade-offs between ReLU, GELU, Swish, and friends.</p>
-						<div class="tags">
-							<span class="chip">Neural Networks</span>
-							<span class="chip">Deep Learning</span>
+						<div class="grid grid-cols-[auto_1fr] gap-5 pb-4 border-b border-ink-200">
+							<div class="font-mono text-[11.5px] uppercase tracking-wider text-ink-500 mt-1">2016 — 2021</div>
+							<div>
+								<div class="font-display display-editorial text-[19px] leading-snug tracking-tight mb-1">Tribhuvan University Merit Scholarship (3×)</div>
+								<div class="text-[14px] text-ink-600 leading-relaxed">Highest percentage in Computer Engineering cohort across 3 of 7 semesters.</div>
+							</div>
 						</div>
-					</article>
-
-					<article class="citation">
-						<h4>DETR: detection as set prediction</h4>
-						<p>On the quiet revolution of Detection Transformer in computer vision, and why framing detection as set prediction matters for medical imaging and NLP.</p>
-						<div class="tags">
-							<span class="chip">DETR</span>
-							<span class="chip">Computer Vision</span>
-							<span class="chip">NLP</span>
+						<div class="grid grid-cols-[auto_1fr] gap-5 pb-4 border-b border-ink-200">
+							<div class="font-mono text-[11.5px] uppercase tracking-wider text-ink-500 mt-1">2018 — Present</div>
+							<div>
+								<div class="font-display display-editorial text-[19px] leading-snug tracking-tight mb-1">National Rubik's Cube Champion</div>
+								<div class="text-[14px] text-ink-600 leading-relaxed">Regional 1st · National 2nd — World Cube Association (WCA).</div>
+							</div>
 						</div>
-					</article>
+						<div class="grid grid-cols-[auto_1fr] gap-5 pb-4 border-b border-ink-200">
+							<div class="font-mono text-[11.5px] uppercase tracking-wider text-ink-500 mt-1">Nov 2018</div>
+							<div>
+								<div class="font-display display-editorial text-[19px] leading-snug tracking-tight mb-1">CTF (Capture The Flag) Winner</div>
+								<div class="text-[14px] text-ink-600 leading-relaxed">Winning team, organized by Western Regional Campus, IOE.</div>
+							</div>
+						</div>
+						<div class="grid grid-cols-[auto_1fr] gap-5">
+							<div class="font-mono text-[11.5px] uppercase tracking-wider text-ink-500 mt-1">2014 — 2016</div>
+							<div>
+								<div class="font-display display-editorial text-[19px] leading-snug tracking-tight mb-1">Student of the Year</div>
+								<div class="text-[14px] text-ink-600 leading-relaxed">Highest percentage in the history of Notre-Dame Higher Secondary School — Physics, Mathematics &amp; Chemistry.</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</section>
 
-	<!-- ─────────────────────────────────────────
-	     §06 — Shipping Portfolio
-	──────────────────────────────────────────── -->
-	<section class="section" id="shipping">
-		<div class="wrap">
-			<div class="section-head reveal">
-				<div class="section-num">§ 06  —  Shipping</div>
-				<h2 class="section-title">A working <em>portfolio</em></h2>
-			</div>
-
-			<div class="shipping-intro reveal">
-				<div class="caption">Fig. 6.1 — Longitudinal shipping record</div>
-				<p>Stitched together from everything I've released publicly — auto-generated and kept honest by the <a class="underlined" href="https://www.yanib.dev" target="_blank" rel="noopener">platform itself</a>.</p>
-			</div>
-
-			<div class="paper-frame reveal">
-				<yanib-portfolio user="binaydhakal" theme="light" limit="3"></yanib-portfolio>
-			</div>
-
-			<div class="projects-grid reveal" style="margin-top: 72px;">
-				<article class="project-card">
-					<div class="pc-num">Project 001</div>
-					<h4>Fracture Detection with DETR</h4>
-					<p>A DETR implementation predicting bounding boxes around fractures in X-ray images — set-prediction applied to medical imaging.</p>
-					<div class="tags">
-						<span class="chip">Computer Vision</span>
-						<span class="chip">DETR</span>
-						<span class="chip">Healthcare</span>
-					</div>
-					<a class="pc-link" href="https://github.com/binaydhakal/Fracture-Detection-with-DETR" target="_blank" rel="noopener">View on GitHub <span class="arrow">↗</span></a>
-				</article>
-
-				<article class="project-card">
-					<div class="pc-num">Project 002</div>
-					<h4>Sentiment Analysis with BERT</h4>
-					<p>Multilingual review/comment sentiment analysis using HuggingFace's BERT-base uncased model on real-world text.</p>
-					<div class="tags">
-						<span class="chip">NLP</span>
-						<span class="chip">BERT</span>
-						<span class="chip">HuggingFace</span>
-					</div>
-					<a class="pc-link" href="https://github.com/binaydhakal/Sentiment_Analysis_with_BERT" target="_blank" rel="noopener">View on GitHub <span class="arrow">↗</span></a>
-				</article>
-
-				<article class="project-card">
-					<div class="pc-num">Project 003</div>
-					<h4>LangChain + OpenAI Scraper</h4>
-					<p>A structured web scraper built with Playwright, using LangChain over OpenAI to extract typed data against arbitrary schemas.</p>
-					<div class="tags">
-						<span class="chip">LangChain</span>
-						<span class="chip">LLM</span>
-						<span class="chip">Scraping</span>
-					</div>
-					<a class="pc-link" href="https://github.com/binaydhakal/langchain-openai-web-scrapper" target="_blank" rel="noopener">View on GitHub <span class="arrow">↗</span></a>
-				</article>
-
-				<article class="project-card">
-					<div class="pc-num">Project 004</div>
-					<h4>MERN Blockchain Banking</h4>
-					<p>A bank application with KYC anchored on the Ethereum blockchain, built end-to-end on the MERN stack.</p>
-					<div class="tags">
-						<span class="chip">Blockchain</span>
-						<span class="chip">MERN</span>
-						<span class="chip">Web3</span>
-					</div>
-					<a class="pc-link" href="https://github.com/binaydhakal/MERN-Webapp-With-Ethereum-Blockchain" target="_blank" rel="noopener">View on GitHub <span class="arrow">↗</span></a>
-				</article>
-
-				<article class="project-card">
-					<div class="pc-num">Project 005</div>
-					<h4>Image Sentiment Classification</h4>
-					<p>Image sentiment classification built on a sequential neural network, exploring convolutional backbones for affective signals.</p>
-					<div class="tags">
-						<span class="chip">Computer Vision</span>
-						<span class="chip">Deep Learning</span>
-						<span class="chip">TensorFlow</span>
-					</div>
-					<a class="pc-link" href="https://github.com/binaydhakal/Image_Classification_Seq_Model" target="_blank" rel="noopener">View on GitHub <span class="arrow">↗</span></a>
-				</article>
-
-				<article class="project-card">
-					<div class="pc-num">Project 006</div>
-					<h4>Sequential ANN</h4>
-					<p>A pedagogical sequential ANN built with TensorFlow against toy training/testing data, used for teaching fundamentals.</p>
-					<div class="tags">
-						<span class="chip">Neural Networks</span>
-						<span class="chip">TensorFlow</span>
-						<span class="chip">Pedagogy</span>
-					</div>
-					<a class="pc-link" href="https://github.com/binaydhakal/Sequential-ANN-with-Tensorflow" target="_blank" rel="noopener">View on GitHub <span class="arrow">↗</span></a>
-				</article>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─────────────────────────────────────────
-	     §07 — Awards
-	──────────────────────────────────────────── -->
-	<section class="section" id="awards">
-		<div class="wrap">
-			<div class="section-head reveal">
-				<div class="section-num">§ 07  —  Recognition</div>
-				<h2 class="section-title">Honours &amp; <em>awards</em></h2>
-			</div>
-
-			<div class="awards-grid reveal">
-				<div class="award">
-					<div class="year">2024 — 2026</div>
-					<h3>Provost's Research Assistant Scholarship</h3>
-					<p>75% scholarship with paid stipend.</p>
-				</div>
-				<div class="award">
-					<div class="year">2016 — 2021</div>
-					<h3>Tribhuwan University Merit Scholarship</h3>
-					<p>Awarded three times for highest percentage in Computer Engineering.</p>
-				</div>
-				<div class="award">
-					<div class="year">2019</div>
-					<h3>CTF Competition — 1st Place</h3>
-					<p>Winner, Catch The Flag, WRC/IOE.</p>
-				</div>
-				<div class="award">
-					<div class="year">2018</div>
-					<h3>Rubik's Cube Solver — Regional Champion</h3>
-					<p>National 2nd place in WCA-sanctioned competition.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─────────────────────────────────────────
-	     §08 — Toolkit
-	──────────────────────────────────────────── -->
-	<section class="section" id="toolkit">
-		<div class="wrap">
-			<div class="section-head reveal">
-				<div class="section-num">§ 08  —  Toolkit</div>
-				<h2 class="section-title">Tools of <em>the trade</em></h2>
-			</div>
-
-			<div class="toolkit reveal">
-				<div class="tool-column">
-					<h3>AI &amp; Machine Learning</h3>
-					<ul class="tool-list">
-						<li>TensorFlow <span class="lvl">daily</span></li>
-						<li>PyTorch <span class="lvl">daily</span></li>
-						<li>Scikit-learn <span class="lvl">fluent</span></li>
-						<li>HuggingFace <span class="lvl">fluent</span></li>
-						<li>OpenCV <span class="lvl">working</span></li>
+				<div class="reveal" style="transition-delay: 0.1s;">
+					<h3 class="font-mono text-[11px] uppercase tracking-[0.14em] text-yanib-600 pb-3 mb-5 border-b border-ink-200">Recent Certifications</h3>
+					<ul class="space-y-3">
+						<li class="flex gap-4 items-baseline pb-3 border-b border-ink-200">
+							<span class="font-mono text-[11px] text-ink-400 w-16 shrink-0">Oct 2025</span>
+							<span class="text-[15px] text-ink-800">AI Agents for Product Leaders <span class="text-ink-500">— LinkedIn Learning</span></span>
+						</li>
+						<li class="flex gap-4 items-baseline pb-3 border-b border-ink-200">
+							<span class="font-mono text-[11px] text-ink-400 w-16 shrink-0">Sep 2025</span>
+							<span class="text-[15px] text-ink-800">Understanding Generative AI in Cloud Computing <span class="text-ink-500">— LinkedIn</span></span>
+						</li>
+						<li class="flex gap-4 items-baseline pb-3 border-b border-ink-200">
+							<span class="font-mono text-[11px] text-ink-400 w-16 shrink-0">Sep 2025</span>
+							<span class="text-[15px] text-ink-800">Generative AI for Business Leaders <span class="text-ink-500">— LinkedIn</span></span>
+						</li>
+						<li class="flex gap-4 items-baseline pb-3 border-b border-ink-200">
+							<span class="font-mono text-[11px] text-ink-400 w-16 shrink-0">Apr 2025</span>
+							<span class="text-[15px] text-ink-800">MLOps Essentials: Model Deployment &amp; Monitoring <span class="text-ink-500">— LinkedIn</span></span>
+						</li>
+						<li class="flex gap-4 items-baseline pb-3 border-b border-ink-200">
+							<span class="font-mono text-[11px] text-ink-400 w-16 shrink-0">Apr 2025</span>
+							<span class="text-[15px] text-ink-800">MLOps Essentials: Model Development &amp; Integration <span class="text-ink-500">— LinkedIn</span></span>
+						</li>
+						<li class="flex gap-4 items-baseline pb-3 border-b border-ink-200">
+							<span class="font-mono text-[11px] text-ink-400 w-16 shrink-0">Apr 2025</span>
+							<span class="text-[15px] text-ink-800">DevOps for Data Scientists <span class="text-ink-500">— LinkedIn</span></span>
+						</li>
+						<li class="flex gap-4 items-baseline pb-3 border-b border-ink-200">
+							<span class="font-mono text-[11px] text-ink-400 w-16 shrink-0">Apr 2025</span>
+							<span class="text-[15px] text-ink-800">Amazon Web Services: Data Services <span class="text-ink-500">— LinkedIn</span></span>
+						</li>
+						<li class="pt-2">
+							<a href="https://linkedin.com/in/dhakalbinay" target="_blank" rel="noopener" class="text-[13px] text-ink-500 italic hover:text-yanib-600 transition-colors">Additional certifications available on LinkedIn ↗</a>
+						</li>
 					</ul>
 				</div>
-				<div class="tool-column">
-					<h3>Languages</h3>
-					<ul class="tool-list">
-						<li>Python <span class="lvl">primary</span></li>
-						<li>JavaScript <span class="lvl">fluent</span></li>
-						<li>TypeScript <span class="lvl">fluent</span></li>
-						<li>C++ <span class="lvl">working</span></li>
-					</ul>
-				</div>
-				<div class="tool-column">
-					<h3>Web &amp; Systems</h3>
-					<ul class="tool-list">
-						<li>React <span class="lvl">fluent</span></li>
-						<li>Next.js <span class="lvl">fluent</span></li>
-						<li>Node.js <span class="lvl">fluent</span></li>
-						<li>Django <span class="lvl">working</span></li>
-					</ul>
-				</div>
-				<div class="tool-column">
-					<h3>Platform &amp; Ops</h3>
-					<ul class="tool-list">
-						<li>Docker <span class="lvl">fluent</span></li>
-						<li>Git <span class="lvl">daily</span></li>
-						<li>AWS <span class="lvl">working</span></li>
-						<li>Postgres <span class="lvl">fluent</span></li>
-					</ul>
-				</div>
+
 			</div>
 		</div>
 	</section>
 
-	<!-- ─────────────────────────────────────────
-	     §09 — Contact / Colophon
-	──────────────────────────────────────────── -->
-	<section class="section" id="contact">
-		<div class="wrap">
-			<div class="section-head reveal">
-				<div class="section-num">§ 09  —  Colophon</div>
-				<h2 class="section-title">Get in <em>touch</em></h2>
-			</div>
+	<!-- ══════════════════════════════════════════
+	     §08 — Contact
+	═══════════════════════════════════════════ -->
+	<section id="contact" class="relative z-10 py-24 md:py-32 border-t border-ink-200 bg-ink-900 text-ink-50">
+		<div class="max-w-6xl mx-auto px-6 md:px-10">
 
-			<div class="colophon reveal">
-				<p class="colophon-quote">Let's build <em>something</em> good together<span style="color:var(--crimson);">.</span></p>
-				<ul class="contact-list">
-					<li>
-						<span class="label">Email</span>
-						<a href="mailto:binaydhakal35@gmail.com">binaydhakal35@gmail.com</a>
-					</li>
-					<li>
-						<span class="label">GitHub</span>
-						<a href="https://github.com/binaydhakal" target="_blank" rel="noopener">@binaydhakal ↗</a>
-					</li>
-					<li>
-						<span class="label">LinkedIn</span>
-						<a href="https://www.linkedin.com/in/dhakalbinay/" target="_blank" rel="noopener">dhakalbinay ↗</a>
-					</li>
-					<li>
-						<span class="label">Yanib</span>
-						<a href="https://www.yanib.dev/u/binaydhakal" target="_blank" rel="noopener">Public shipping log ↗</a>
-					</li>
-					<li>
-						<span class="label">Phone</span>
-						<a href="tel:+14752015355">+1 475-201-5355</a>
-					</li>
-				</ul>
+			<div class="reveal font-mono text-[11.5px] uppercase tracking-[0.14em] text-yanib-500 mb-8">§ 08 — Contact</div>
+
+			<div class="reveal grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-24 items-start">
+
+				<div>
+					<h2 class="font-display display-editorial text-[44px] sm:text-[64px] md:text-[88px] leading-[0.92] tracking-tightest">
+						Let's build <span class="display-italic" style="color: #a78bfa;">something</span> good.<span class="text-yanib-500">.</span>
+					</h2>
+					<p class="mt-8 text-[17px] leading-relaxed text-ink-300 max-w-[52ch]">
+						I'm always up for a conversation — about hiring, collaborating on AI/ML research, integrating Yanib at your company, or sharing notes on shipping software that works.
+					</p>
+				</div>
+
+				<div class="w-full">
+					<ul class="divide-y divide-ink-700">
+						<li class="py-5 flex items-center justify-between gap-4">
+							<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400">Email</span>
+							<a href="mailto:binaydhakal35@gmail.com" class="font-display display-body text-[17px] text-ink-50 hover:text-yanib-500 transition-colors">binaydhakal35@gmail.com</a>
+						</li>
+						<li class="py-5 flex items-center justify-between gap-4">
+							<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400">LinkedIn</span>
+							<a href="https://linkedin.com/in/dhakalbinay" target="_blank" rel="noopener" class="font-display display-body text-[17px] text-ink-50 hover:text-yanib-500 transition-colors">@dhakalbinay ↗</a>
+						</li>
+						<li class="py-5 flex items-center justify-between gap-4">
+							<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400">GitHub</span>
+							<a href="https://github.com/binaydhakal" target="_blank" rel="noopener" class="font-display display-body text-[17px] text-ink-50 hover:text-yanib-500 transition-colors">@binaydhakal ↗</a>
+						</li>
+						<li class="py-5 flex items-center justify-between gap-4">
+							<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400">Yanib</span>
+							<a href="https://www.yanib.dev" target="_blank" rel="noopener" class="font-display display-body text-[17px] text-ink-50 hover:text-yanib-500 transition-colors">yanib.dev ↗</a>
+						</li>
+						<li class="py-5 flex items-center justify-between gap-4">
+							<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-400">Phone</span>
+							<a href="tel:+14752015355" class="font-display display-body text-[17px] text-ink-50 hover:text-yanib-500 transition-colors">+1 475-201-5355</a>
+						</li>
+					</ul>
+				</div>
+
 			</div>
 		</div>
 	</section>
 
-	<!-- ─────────────────────────────────────────
+	<!-- ══════════════════════════════════════════
 	     Footer
-	──────────────────────────────────────────── -->
-	<footer class="colophon-meta">
-		<div class="wrap colophon-meta-inner">
+	═══════════════════════════════════════════ -->
+	<footer class="relative z-10 bg-ink-900 border-t border-ink-700 text-ink-400">
+		<div class="max-w-6xl mx-auto px-6 md:px-10 py-10 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.1em]">
 			<div>
-				<span class="star">§</span> Set in Fraunces &amp; IBM Plex. Built by hand, one page, no framework.
+				<span class="text-yanib-500">§</span> Set in Fraunces &amp; Geist · Built by hand, one page
 			</div>
 			<div>
-				© <span id="year">2026</span> Binaya Dhakal — Live shipping log powered by <a class="underlined" href="https://www.yanib.dev" target="_blank" rel="noopener">Yanib</a>
+				© <span id="year"></span> Binaya Dhakal · Live shipping data via <a href="https://www.yanib.dev" target="_blank" rel="noopener" class="hover:text-yanib-500 transition-colors">Yanib</a>
 			</div>
 		</div>
 	</footer>
 
-	<!-- Floating release-notifications bell (bottom-right). Swap slug for a different repo. -->
+	<!-- Floating Yanib notifications bell — bottom-right -->
 	<yanib-notifications slug="binaydhakal-outpost" position="bottom-right"></yanib-notifications>
 
 	<script>
-		// Set year + dateline
 		document.getElementById("year").textContent = new Date().getFullYear();
-		const todayEl = document.getElementById("today");
-		if (todayEl) {
+		const today = document.getElementById("today");
+		if (today) {
 			const d = new Date();
-			const month = d.toLocaleString("en-US", { month: "long" });
-			todayEl.textContent = `West Haven, CT — ${month} ${d.getFullYear()}`;
+			today.textContent = `${d.toLocaleString("en-US", { month: "long" })} ${d.getFullYear()}`;
 		}
 
-		// Intersection-observer reveals
+		// IntersectionObserver reveals
 		const io = new IntersectionObserver((entries) => {
 			entries.forEach((e) => {
 				if (e.isIntersecting) {
@@ -1488,7 +851,7 @@
 					io.unobserve(e.target);
 				}
 			});
-		}, { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
+		}, { threshold: 0.08, rootMargin: "0px 0px -6% 0px" });
 		document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 	</script>
 </body>

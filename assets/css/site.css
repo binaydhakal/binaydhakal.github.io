@@ -233,7 +233,9 @@ ul, ol { list-style: none; }
 	border: 1px solid #232320;
 	padding: 20px;
 	background: rgba(0, 0, 0, .25);
+	overflow-x: auto;
 }
+yanib-github-profile { display: block; max-width: 100%; }
 .widget-caption {
 	margin-top: 12px;
 	color: var(--text-label);

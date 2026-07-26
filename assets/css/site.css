@@ -408,4 +408,36 @@ ul, ol { list-style: none; }
 	.timeline li::before { left: -33px; }
 }
 
-/* ===== section styles appended below ===== */
+/* ---------- contact ---------- */
+.contact { text-align: center; padding: 150px 0; }
+.contact h2 {
+	font-family: var(--font-display);
+	color: var(--text-hi);
+	font-size: clamp(36px, 6vw, 58px);
+	font-weight: 700;
+	letter-spacing: -.02em;
+}
+.contact-email {
+	display: inline-block;
+	margin-top: 20px;
+	color: var(--text-lead);
+	font-size: 17px;
+	transition: color .2s ease;
+}
+.contact-email:hover { color: var(--gold); }
+.contact-links {
+	margin-top: 40px;
+	display: flex;
+	justify-content: center;
+	gap: 32px;
+	font-size: 11px;
+	letter-spacing: .25em;
+	text-transform: uppercase;
+}
+.contact-links a { color: #8a8a8f; transition: color .2s ease; }
+.contact-links a:hover { color: var(--gold); }
+
+@media (max-width: 720px) {
+	.contact { padding: 100px 0; }
+	.contact-links { gap: 20px; flex-wrap: wrap; }
+}

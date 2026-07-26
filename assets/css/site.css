@@ -182,4 +182,154 @@ ul, ol { list-style: none; }
 	.section { padding: 80px 0; }
 }
 
+/* ---------- ventures: flagship ---------- */
+.flagship {
+	border: 1px solid #2e2a20;
+	background: linear-gradient(135deg, #131311 0%, #0f0f11 100%);
+	padding: 44px;
+}
+.flagship-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+.flagship-role {
+	font-family: var(--font-display);
+	color: var(--gold);
+	font-size: 10px;
+	letter-spacing: .28em;
+	text-transform: uppercase;
+}
+.badge {
+	border: 1px solid #2f4f2f;
+	color: #7fb77f;
+	font-size: 10px;
+	letter-spacing: .18em;
+	text-transform: uppercase;
+	padding: 5px 11px;
+}
+.flagship h3 {
+	font-family: var(--font-display);
+	color: var(--text-hi);
+	font-size: clamp(30px, 4vw, 42px);
+	font-weight: 700;
+	margin-top: 20px;
+	line-height: 1.1;
+}
+.tagline { color: #9a968e; font-size: 17px; margin-top: 4px; }
+.flagship .desc { max-width: 580px; margin-top: 18px; font-size: 14.5px; }
+.flagship .link-gold { display: inline-block; margin-top: 20px; }
+.link-gold {
+	color: var(--gold);
+	font-size: 13px;
+	letter-spacing: .08em;
+}
+.link-gold span { display: inline-block; transition: transform .2s ease; }
+.link-gold:hover span { transform: translateX(4px); }
+.widget-frame {
+	margin-top: 30px;
+	border: 1px solid #232320;
+	padding: 20px;
+	background: rgba(0, 0, 0, .25);
+}
+.widget-caption {
+	margin-top: 12px;
+	color: var(--text-label);
+	font-size: 11px;
+	letter-spacing: .08em;
+}
+
+/* ---------- ventures: cards ---------- */
+.venture-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+	margin-top: 16px;
+}
+.venture-card {
+	border: 1px solid var(--border-card);
+	padding: 32px;
+	display: flex;
+	flex-direction: column;
+	transition: border-color .25s ease, transform .25s ease;
+}
+.venture-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+.card-role {
+	color: #8a8a8f;
+	font-size: 10px;
+	letter-spacing: .28em;
+	text-transform: uppercase;
+}
+.venture-card h4 {
+	font-family: var(--font-display);
+	color: var(--text-hi);
+	font-size: 22px;
+	font-weight: 700;
+	margin-top: 12px;
+}
+.card-tagline { color: var(--text-lead); font-size: 13.5px; margin-top: 4px; font-weight: 500; }
+.card-desc { font-size: 13px; margin-top: 10px; }
+.platforms {
+	margin-top: auto;
+	padding-top: 22px;
+	color: #8a8a8f;
+	font-size: 11px;
+	letter-spacing: .14em;
+	text-transform: uppercase;
+}
+.platforms .link-gold { text-transform: none; letter-spacing: .08em; font-size: 12px; }
+
+/* ---------- ventures: current strip ---------- */
+.current {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	flex-wrap: wrap;
+	border: 1px solid #1e1e24;
+	background: var(--panel-2);
+	padding: 20px 28px;
+	margin-top: 16px;
+	transition: border-color .25s ease;
+}
+.current:hover { border-color: var(--gold); }
+.current-label {
+	font-family: var(--font-display);
+	color: var(--gold);
+	font-size: 10px;
+	letter-spacing: .28em;
+	text-transform: uppercase;
+	margin-right: 14px;
+}
+.current-role { color: #ddd; font-size: 14px; font-weight: 600; }
+.pulse {
+	color: #4a7a4a;
+	font-size: 10px;
+	letter-spacing: .18em;
+	text-transform: uppercase;
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+}
+.pulse-dot {
+	width: 6px; height: 6px;
+	border-radius: 50%;
+	background: #4a7a4a;
+	animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+	0%, 100% { opacity: 1; }
+	50% { opacity: .3; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.pulse-dot { animation: none; }
+}
+@media (max-width: 720px) {
+	.flagship { padding: 30px 24px; }
+	.venture-grid { grid-template-columns: 1fr; }
+	.current { flex-direction: column; align-items: flex-start; }
+}
+
 /* ===== section styles appended below ===== */

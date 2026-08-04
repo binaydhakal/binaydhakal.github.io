@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: Letter; margin: 0; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Inter',sans-serif;
+    font-size:9.4pt; line-height:1.45; color:#1a1a1a;
+    -webkit-font-smoothing:antialiased;
+    width:216mm; padding:13mm 15mm;
+  }
+  a { color:#8a6d28; text-decoration:none; }
+
+  /* header */
+  .name {
+    font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:25pt; letter-spacing:-.6pt; color:#0b0b0d; line-height:1;
+  }
+  .roles {
+    font-family:'Space Grotesk',sans-serif; font-weight:500;
+    font-size:10.5pt; color:#8a6d28; margin-top:4pt;
+  }
+  .contact { font-size:8.5pt; color:#444; margin-top:6pt; }
+  .contact span { white-space:nowrap; }
+  .sep { color:#bbb; margin:0 5pt; }
+  hr.rule { border:0; border-top:1.6pt solid #c9a24b; margin:9pt 0 0; }
+
+  /* sections */
+  h2 {
+    font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:8.6pt; letter-spacing:1.6pt; text-transform:uppercase;
+    color:#0b0b0d; margin:11pt 0 5pt;
+    border-bottom:.6pt solid #d8d8d8; padding-bottom:2.5pt;
+  }
+  .item { margin-bottom:7.5pt; }
+  .item:last-child { margin-bottom:0; }
+  .row { display:flex; justify-content:space-between; align-items:baseline; gap:10pt; }
+  .lead { font-weight:700; font-size:10pt; color:#0b0b0d; }
+  .org { font-weight:600; }
+  .when { font-size:8.3pt; color:#666; white-space:nowrap; font-style:italic; }
+  .sub { font-size:9pt; color:#333; font-style:italic; margin-top:.5pt; }
+  ul { margin:3pt 0 0 12pt; }
+  li { margin-bottom:1.8pt; }
+  .note { font-size:8.7pt; color:#555; margin-top:2pt; }
+
+  /* skills + awards compact */
+  table.kv { width:100%; border-collapse:collapse; }
+  table.kv td { vertical-align:top; padding:1.4pt 0; font-size:9pt; }
+  table.kv td.k { width:110pt; font-weight:600; color:#0b0b0d; }
+  .award { display:flex; justify-content:space-between; gap:10pt; margin-bottom:3pt; font-size:9.2pt; }
+  .pub { margin-bottom:6pt; font-size:9.2pt; break-inside:avoid; page-break-inside:avoid; }
+  .item, .award { break-inside:avoid; page-break-inside:avoid; }
+  h2 { break-after:avoid; page-break-after:avoid; }
+  .pub .t { font-weight:600; color:#0b0b0d; }
+  .venue { color:#555; font-style:italic; }
+  .tag {
+    display:inline-block; font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:7.2pt; letter-spacing:.8pt; text-transform:uppercase;
+    color:#8a6d28; border:.7pt solid #c9a24b; border-radius:2pt;
+    padding:.6pt 3.5pt; margin-right:4pt; vertical-align:1pt;
+  }
+</style>
+</head>
+<body>
+
+  <div class="name">Binaya Dhakal</div>
+  <div class="roles">Co-founder at Yanib &nbsp;·&nbsp; AI Software Engineer at Fluid Commerce</div>
+  <div class="contact">
+    <span>binaydhakal35@gmail.com</span><span class="sep">|</span><span>+1 475-201-5355</span><span class="sep">|</span><span>West Haven, CT, USA</span><span class="sep">|</span><span><a href="https://www.dhakalbinaya.com.np">dhakalbinaya.com.np</a></span><br>
+    <span><a href="https://github.com/binaydhakal">github.com/binaydhakal</a></span><span class="sep">|</span><span><a href="https://www.linkedin.com/in/dhakalbinay/">linkedin.com/in/dhakalbinay</a></span><span class="sep">|</span><span><a href="https://scholar.google.com/citations?user=4LWoepUAAAAJ">Google Scholar</a></span>
+  </div>
+  <hr class="rule">
+
+  <h2>Experience</h2>
+
+  <div class="item">
+    <div class="row">
+      <span class="lead">Yanib <span style="font-weight:400;color:#666">— <a href="https://www.yanib.dev">yanib.dev</a></span></span>
+      <span class="when">2026 – Present</span>
+    </div>
+    <div class="sub">Co-founder</div>
+    <ul>
+      <li>Building the shipping layer for software teams: AI-drafted release notes generated from commits, QA-reviewed against the code, then published to GitHub, Slack, Discord and email.</li>
+      <li>Launched March 2026. Member of the NVIDIA Inception program.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="row">
+      <span class="lead">Fluid Commerce <span style="font-weight:400;color:#666">— <a href="https://www.fluid.app">fluid.app</a></span></span>
+      <span class="when">May 2025 – Present</span>
+    </div>
+    <div class="sub">AI Software Engineer</div>
+    <ul>
+      <li>One of the first engineers on Fluid since 2021, when it was a client project at Danphe and the CTO was the only person writing code.</li>
+      <li>Built large parts of the production multi-tenant social-commerce platform: the Liquid theme engine behind merchant storefronts, payments and subscriptions across Braintree and Stripe with VGS tokenization, the FairShare affiliate attribution system, and AI rep-outreach features.</li>
+      <li>Brands running on the platform clear over $1M in sales on peak days. Fluid raised $15M in March 2026.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="row">
+      <span class="lead">University of New Haven</span>
+      <span class="when">Aug 2024 – Jan 2026</span>
+    </div>
+    <div class="sub">Research Assistant — West Haven, CT</div>
+    <ul>
+      <li>Deep representation learning on multi-compartment microbiome data; built the autoencoder framework behind the first-author publication below.</li>
+      <li>Applied autoencoders and VAEs for dimensionality reduction across biological and e-commerce datasets.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="row">
+      <span class="lead">Danphe Software Labs</span>
+      <span class="when">May 2021 – May 2024</span>
+    </div>
+    <div class="sub">Senior Software Engineer — Kathmandu, Nepal</div>
+    <ul>
+      <li>Full-stack engineer (web, mobile, backend) building features for MLM commerce clients. Fluid was a client project here; I was one of the first engineers on it.</li>
+      <li>Developed cyber-attack detection over high-volume data using SVM, CNN and RNN models with NLP techniques for entity recognition and text analysis.</li>
+      <li>Built workplace-experience analytics driven by event-based questionnaires with metric dashboards.</li>
+    </ul>
+  </div>
+
+  <h2>Products Shipped</h2>
+  <div class="item">
+    <div class="row">
+      <span class="lead">Capsify <span style="font-weight:400;color:#666">— <a href="https://www.capsify.app">capsify.app</a></span></span>
+      <span class="when">iOS &amp; Android</span>
+    </div>
+    <div class="note">Collaborative capsules of photos, places, notes and music, built with friends and sealed until an opening date.</div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <span class="lead">Solmari <span style="font-weight:400;color:#666">— <a href="https://www.solmari.app">solmari.app</a></span></span>
+      <span class="when">iOS</span>
+    </div>
+    <div class="note">A private AI assistant running fully on-device: chat grounded in your own notes, semantic search and writing tools with no account, no server and no network calls. Runs Apple's on-device model alongside open models such as Gemma and Qwen.</div>
+  </div>
+
+  <h2>Publications</h2>
+  <div class="pub">
+    <span class="tag">First author</span><span class="t">Integrating multi-compartment microbiome data with clinical parameters enhances mortality prediction using autoencoder.</span>
+    <div>Dhakal B, Savarapu LSK, Sayed K. <span class="venue">Journal of Microbiological Methods</span>, vol. 238, 107267, Nov 2025. DOI: <a href="https://doi.org/10.1016/j.mimet.2025.107267">10.1016/j.mimet.2025.107267</a> · PMID 40972768</div>
+  </div>
+  <div class="pub">
+    <span class="tag">Co-author</span><span class="t">Effects of Sudarshan Kriya Yoga (SKY) on the stress and self-esteem of medical doctors in a tertiary care hospital: a prospective analytical study.</span>
+    <div>Khadka B, Dhakal B, et al. <span class="venue">Annals of Medicine and Surgery</span>, vol. 86, pp. 4527–4531, Aug 2024. DOI: <a href="https://doi.org/10.1097/MS9.0000000000002289">10.1097/MS9.0000000000002289</a></div>
+  </div>
+
+  <h2>Education</h2>
+  <div class="item">
+    <div class="row">
+      <span class="lead">M.S. Data Science <span style="font-weight:400;color:#666">— University of New Haven, CT, USA</span></span>
+      <span class="when">Aug 2024 – Jan 2026</span>
+    </div>
+    <div class="note">Artificial Intelligence, Machine Learning, Deep Learning, Bioinformatics, Natural Language Processing, Distributed and Scalable Data Engineering.</div>
+  </div>
+  <div class="item">
+    <div class="row">
+      <span class="lead">B.E. Computer Engineering <span style="font-weight:400;color:#666">— Paschimanchal Campus, IOE, Pokhara, Nepal</span></span>
+      <span class="when">Dec 2016 – Jan 2021</span>
+    </div>
+    <div class="note">Tribhuvan University. Data Structures &amp; Algorithms, Algorithm and Complexity, Software Engineering, Probability and Statistics, Machine Learning, Speech and Language Processing.</div>
+  </div>
+
+  <h2>Honors &amp; Awards</h2>
+  <div class="award"><span><strong>Provost's Research Assistant Scholarship</strong>, University of New Haven — 75% tuition scholarship with paid stipend.</span><span class="when">2024 – 2026</span></div>
+  <div class="award"><span><strong>National Level Rubik's Cube Solver</strong> — Regional Champion, National 2nd, World Cube Association (<a href="https://www.worldcubeassociation.org/persons/2019DHAK01">WCA profile</a>).</span><span class="when">2018 – Present</span></div>
+  <div class="award"><span><strong>Capture the Flag winner</strong> — member of the winning team, CTF competition organised by Paschimanchal Campus, IOE.</span><span class="when">Nov 2018</span></div>
+  <div class="award"><span><strong>Tribhuvan University Merit Scholarship</strong> — awarded three times for the highest percentage in the Computer Engineering cohort.</span><span class="when">2016 – 2021</span></div>
+
+  <h2>Technical Skills</h2>
+  <table class="kv">
+    <tr><td class="k">Languages</td><td>Python, JavaScript, TypeScript, Ruby, R, C++, Solidity</td></tr>
+    <tr><td class="k">ML &amp; AI</td><td>PyTorch, TensorFlow, Scikit-learn, autoencoders &amp; VAEs, transformers, LLMs, RAG, on-device inference, Pandas, NumPy, Jupyter</td></tr>
+    <tr><td class="k">Web &amp; Mobile</td><td>Ruby on Rails, React, React Native, Next.js, Node.js, Django, Liquid templating</td></tr>
+    <tr><td class="k">Data</td><td>PostgreSQL, MySQL, MongoDB</td></tr>
+    <tr><td class="k">Payments</td><td>Stripe, Braintree, VGS tokenization, subscription billing, in-app purchase</td></tr>
+    <tr><td class="k">Infrastructure</td><td>AWS, Google Cloud, Docker, Git, Linux, Firebase, Heroku, App Store &amp; Play Store release</td></tr>
+  </table>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Writing — Binaya Dhakal</title>
+	<meta name="description" content="Notes on building AI infrastructure: on-device LLMs, agent security, and open-source tooling.">
+	<link rel="canonical" href="https://www.dhakalbinaya.com.np/blog/">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/favicon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #0b0b0d; --panel: #121216; --ink: #e8e6e1; --muted: #a09d96;
+			--gold: #c9a24b; --line: #26262c;
+		}
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		body {
+			background: var(--bg); color: var(--ink);
+			font-family: 'Inter', sans-serif; font-size: 1.05rem; line-height: 1.7;
+			-webkit-font-smoothing: antialiased;
+		}
+		.wrap { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+		.crumbs { font-family: 'Space Grotesk', sans-serif; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; }
+		.crumbs a { color: var(--muted); text-decoration: none; }
+		.crumbs a:hover { color: var(--gold); }
+		h1 {
+			font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+			font-size: clamp(1.7rem, 4.5vw, 2.2rem); margin: 1.6rem 0 .4rem; letter-spacing: -.02em;
+		}
+		.sub { color: var(--muted); margin-bottom: 2.6rem; }
+		.post {
+			display: block; background: var(--panel); border: 1px solid var(--line);
+			border-radius: 10px; padding: 1.4rem 1.6rem; text-decoration: none; color: inherit;
+			transition: border-color .18s ease;
+		}
+		.post:hover { border-color: var(--gold); }
+		.post h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; margin-bottom: .35rem; color: var(--ink); }
+		.post p { color: var(--muted); font-size: .96rem; }
+		.post .date { color: var(--gold); font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; }
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<nav class="crumbs"><a href="/">BD — Home</a></nav>
+		<h1>Writing</h1>
+		<p class="sub">Notes on building AI infrastructure: on-device LLMs, agent security, open-source tooling.</p>
+
+		<a class="post" href="/blog/tool-call-guard/">
+			<span class="date">August 4, 2026</span>
+			<h2>A deny-by-default gate for AI agent tool calls</h2>
+			<p>Agents misused tools in 500+ reported incidents this year. I built the enforcement layer: one JSON policy, enforced in JavaScript and Python.</p>
+		</a>
+	</div>
+</body>
+</html>

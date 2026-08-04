@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>A deny-by-default gate for AI agent tool calls — Binaya Dhakal</title>
+	<meta name="description" content="Why I built tool-call-guard: one JSON policy for agent tool calls, enforced in JavaScript and Python. Allowlists, rate caps, approval hooks, audit trail.">
+	<link rel="canonical" href="https://www.dhakalbinaya.com.np/blog/tool-call-guard/">
+	<meta property="og:title" content="A deny-by-default gate for AI agent tool calls">
+	<meta property="og:description" content="One JSON policy for agent tool calls, enforced in JavaScript and Python.">
+	<meta property="og:type" content="article">
+	<meta property="og:url" content="https://www.dhakalbinaya.com.np/blog/tool-call-guard/">
+	<meta property="og:image" content="https://www.dhakalbinaya.com.np/assets/images/og/og-cover.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/favicon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #0b0b0d; --panel: #121216; --ink: #e8e6e1; --muted: #a09d96;
+			--gold: #c9a24b; --line: #26262c;
+		}
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		body {
+			background: var(--bg); color: var(--ink);
+			font-family: 'Inter', sans-serif; font-size: 1.06rem; line-height: 1.75;
+			-webkit-font-smoothing: antialiased;
+		}
+		.wrap { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+		.crumbs { font-family: 'Space Grotesk', sans-serif; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; }
+		.crumbs a { color: var(--muted); text-decoration: none; }
+		.crumbs a:hover { color: var(--gold); }
+		.crumbs span { color: var(--line); margin: 0 .5rem; }
+		h1 {
+			font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+			font-size: clamp(1.7rem, 4.5vw, 2.4rem); line-height: 1.2;
+			letter-spacing: -.02em; margin: 1.6rem 0 .6rem;
+		}
+		.meta { color: var(--muted); font-size: .92rem; margin-bottom: 2.4rem; }
+		.meta b { color: var(--gold); font-weight: 600; }
+		h2 {
+			font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.25rem;
+			margin: 2.6rem 0 .8rem; letter-spacing: -.01em;
+		}
+		p { margin-bottom: 1.15rem; }
+		a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,162,75,.35); }
+		a:hover { border-bottom-color: var(--gold); }
+		ul { margin: 0 0 1.15rem 1.2rem; }
+		li { margin-bottom: .55rem; }
+		pre {
+			background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+			padding: 1rem 1.2rem; overflow-x: auto; margin: 0 0 1.3rem;
+			font-family: 'JetBrains Mono', monospace; font-size: .85rem; line-height: 1.6;
+		}
+		code { font-family: 'JetBrains Mono', monospace; font-size: .88em; color: #d9d5cd; }
+		p code, li code { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: .1em .35em; }
+		.rule { border: 0; border-top: 1px solid var(--line); margin: 2.6rem 0; }
+		.foot { color: var(--muted); font-size: .95rem; }
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<nav class="crumbs"><a href="/">BD</a><span>/</span><a href="/blog/">Writing</a></nav>
+
+		<h1>A deny-by-default gate for AI agent tool calls</h1>
+		<p class="meta"><b>Binaya Dhakal</b> · August 4, 2026 · 6 min read</p>
+
+		<p>OWASP's 2026 agentic security report counts over 500 incidents this year where an AI agent misused a tool it had legitimate access to. Most of them are not exotic jailbreaks. An agent reads a web page or an email, the page contains instructions meant for the model, and the agent follows them, with your API keys and your authority. Prompt injection was an annoyance when models could only talk. Once they can call tools, it is a security problem.</p>
+
+		<p>I ship agent features for a living, so I went looking for the enforcement layer: the piece that decides, at runtime, "this call is allowed and this one is not." I mostly found two other things. Scanners, which inspect an MCP server for malicious tool definitions before you install it. And guardrails, which filter prompts and model output. Both are useful. Neither stands between the model and the actual tool call.</p>
+
+		<p>The gap is not a secret. The OpenAI Agents SDK has <a href="https://github.com/openai/openai-agents-python/issues/2515">open</a> <a href="https://github.com/openai/openai-agents-python/issues/2970">issues</a> asking for tool allowlists, policy enforcement, and audit trails. Vercel's AI SDK recently added approval hooks. Everyone is circling the same missing piece.</p>
+
+		<p>So I built it. <a href="https://github.com/binaydhakal/tool-call-guard">tool-call-guard</a> is a small policy engine that wraps any framework's tools. The policy is a JSON document:</p>
+
+<pre><code>{
+  "defaultAction": "deny",
+  "tools": {
+    "search_*":   {},
+    "send_email": { "maxCallsPerMinute": 5 },
+    "deploy":     { "action": "approve" },
+    "shell_exec": { "action": "deny" }
+  }
+}</code></pre>
+
+		<p>Anything not listed is blocked. <code>search_*</code> allowlists a group of tools. <code>send_email</code> is rate capped. <code>deploy</code> goes to a human before it runs. <code>shell_exec</code> never runs, even if someone later flips the default to allow.</p>
+
+		<p>There is no model anywhere in this. It is deterministic code you can read in one code review, with tests that run on fake clocks. The same JSON document is enforced by two implementations: <a href="https://www.npmjs.com/package/@yanib/tool-call-guard">@yanib/tool-call-guard</a> on npm and <a href="https://pypi.org/project/tool-call-guard/">tool-call-guard</a> on PyPI. Your Node gateway and your Python agents run one policy, and their audit logs share a schema, so a single dashboard can watch both.</p>
+
+		<h2>The decisions that took actual thought</h2>
+
+		<p>The code is small. The behavior around the edges is where the time went.</p>
+
+		<ul>
+			<li><em>Deny by default.</em> An empty policy blocks everything. If the posture is opt-out, one forgotten tool becomes the hole.</li>
+			<li><em>Validation runs before quota.</em> Malformed calls never consume budget, so an attacker cannot starve a tool by spamming garbage at it.</li>
+			<li><em>An approval rule with no approver configured denies.</em> Failing open here would turn a typo in your wiring into a bypass.</li>
+			<li><em>Dry-run is a first-class mode.</em> Nobody turns on enforcement against production traffic on day one. In dry-run everything proceeds, and the audit log records what would have been blocked. Approvers are never invoked during a rehearsal, because paging a human for practice is how you teach them to ignore pages.</li>
+			<li><em>Wildcard rules share one budget.</em> <code>"fs_*": { "maxCalls": 10 }</code> means ten calls across the whole group. Per-tool budgets under a wildcard would multiply your exposure by however many tools match.</li>
+		</ul>
+
+		<h2>The bug my own tests caught</h2>
+
+		<p>Validators in the Python version accept either a plain function or a pydantic model class. My dispatch checked <code>callable(validator)</code> first. Pydantic model classes are classes, and classes are callable, so the guard tried to construct the model instead of calling <code>model_validate</code>, and every schema validation failed. The mirrored test suite caught it before anyone else could. A real user with real pydantic models would have hit it within minutes.</p>
+
+		<p>I mention this because "70 tests, all green" sounds like ceremony until one of them catches something like that. Now it is a regression test.</p>
+
+		<h2>Naming, or: check the squashed variants</h2>
+
+		<p>Publishing was its own small comedy. npm rejected the bare name because <code>toolcallguard</code> exists, a different library that does schema validation with retries. Earlier this week PyPI rejected another package of mine, <code>token-budget</code>, because <code>token-bucket</code> exists. Two registries, two different similarity rules, both invisible until the moment you publish. The lesson I now follow: before committing to any package name, check the collapsed variants, with hyphens stripped, on every registry you care about. The npm package ended up scoped as <code>@yanib/tool-call-guard</code>, which I have made peace with. The scope is my company. Every install line is a small ad.</p>
+
+		<h2>Using it</h2>
+
+<pre><code>npm i @yanib/tool-call-guard      # JS / TS
+pip install tool-call-guard       # Python</code></pre>
+
+		<p>Wrap your tools, hand the guard your policy, and denied calls throw before the tool runs. The <a href="https://github.com/binaydhakal/tool-call-guard">README</a> covers approval hooks, JSONL audit sinks, and the dry-run rollout path.</p>
+
+		<p>This sits in the middle of a defense-in-depth stack. Scanners vet what you install. Model guardrails filter text. This enforces what actually executes. If you find a hole in the policy model, open an issue. The library is small on purpose and I would like to keep it auditable.</p>
+
+		<hr class="rule">
+		<p class="foot">I'm Binaya. I co-founded <a href="https://www.yanib.dev">Yanib</a> and build AI features at <a href="https://www.fluid.app">Fluid</a>. More at <a href="/">dhakalbinaya.com.np</a>.</p>
+	</div>
+</body>
+</html>

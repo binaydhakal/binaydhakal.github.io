@@ -68,7 +68,7 @@
 
 		<p>I ship agent features for a living, so I went looking for the enforcement layer: the piece that decides, at runtime, "this call is allowed and this one is not." I mostly found two other things. Scanners, which inspect an MCP server for malicious tool definitions before you install it. And guardrails, which filter prompts and model output. Both are useful. Neither stands between the model and the actual tool call.</p>
 
-		<p>The gap is not a secret. The OpenAI Agents SDK has <a href="https://github.com/openai/openai-agents-python/issues/2515">open</a> <a href="https://github.com/openai/openai-agents-python/issues/2970">issues</a> asking for tool allowlists, policy enforcement, and audit trails. Vercel's AI SDK recently added approval hooks. Everyone is circling the same missing piece.</p>
+		<p>The gap is not a secret. The OpenAI Agents SDK's tracker has long design threads on <a href="https://github.com/openai/openai-agents-python/issues/2515">tool-level governance</a> and <a href="https://github.com/openai/openai-agents-python/issues/2970">pre-execution validation</a>, and Vercel's AI SDK added approval hooks this year. Framework by framework, pieces are landing. What I could not find is a policy layer that is framework-agnostic and identical across languages, so one reviewed document governs a Node gateway and a Python agent the same way.</p>
 
 		<p>So I built it. <a href="https://github.com/binaydhakal/tool-call-guard">tool-call-guard</a> is a small policy engine that wraps any framework's tools. The policy is a JSON document:</p>
 
